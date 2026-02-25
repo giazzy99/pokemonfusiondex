@@ -30,9 +30,9 @@
             transform: scale(1.05);
         }
 
-        /* IMMAGINE DELLA CARD RIDOTTA DEL 50% */
+        /* SOLO immagine della CARD principale – Alakazario ridotta del 50% */
         .card img {
-            width: 75px !important; /* 150px originale ÷ 2 = 50% */
+            width: 75px !important; /* metà di 150px */
             transition: transform 0.2s;
         }
 
@@ -57,7 +57,7 @@
             position: relative;
         }
 
-        /* MINIATURA NELLA MODALE 1:3 */
+        /* Miniatura 1:3 dentro la modale */
         .modal-img {
             width: 50px; /* 150px / 3 */
             display: block;
@@ -79,7 +79,7 @@
 
 <h1>FusionDex</h1>
 
-<!-- CARD -->
+<!-- CARD PRINCIPALE -->
 <div class="card" onclick="openModal()">
     <h3>#001</h3>
     <img src="Alakazario.png" alt="Alakazario">
