@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>FusionDex</title>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,9 +30,12 @@
             transform: scale(1.05);
         }
 
+        /* IMMAGINE DELLA CARD RIDOTTA DEL 25% */
         .card img {
-    width: 150px * 0.50; /* 75% della dimensione originale */
-}
+            width: 112px !important; /* 150px * 0.75 */
+            transition: transform 0.2s;
+        }
+
         /* MODALE */
         .modal {
             display: none;
@@ -55,11 +57,12 @@
             position: relative;
         }
 
-        .modal-content .modal-img {
-    width: 50px !important;
-    display: block;
-    margin: 0 auto 10px auto;
-}
+        /* MINIATURA NELLA MODALE 1:3 */
+        .modal-img {
+            width: 50px; /* 150px / 3 */
+            display: block;
+            margin: 0 auto 10px auto;
+        }
 
         .close {
             position: absolute;
@@ -68,7 +71,6 @@
             font-size: 20px;
             cursor: pointer;
         }
-
     </style>
 </head>
 
@@ -83,7 +85,7 @@
     <h2>Alakazario</h2>
 </div>
 
-<!-- FINESTRA POPUP -->
+<!-- MODALE -->
 <div id="pokemonModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
@@ -96,7 +98,7 @@
         <p><strong>Tipo:</strong> Buio / Lotta</p>
 
         <p>
-            Qui potrai inserire la descrizione completa del tuo Pokémon Fusione.
+            Qui puoi inserire la descrizione completa del tuo Pokémon Fusione.
             Origine, abilità, lore, statistiche inventate, tutto quello che vuoi.
         </p>
     </div>
@@ -120,4 +122,4 @@ window.onclick = function(event) {
 </script>
 
 </body>
-</html> 
+</html>
