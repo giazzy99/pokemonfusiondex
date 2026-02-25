@@ -11,16 +11,43 @@
 
         .card {
             background: white;
-            width: 250px;
+            width: 200px;
             margin: 20px;
-            padding: 15px;
+            padding: 10px;
             border-radius: 10px;
             display: inline-block;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
         }
 
-        img {
-            width: 200px;
+        .card img {
+            width: 150px;
+        }
+
+        /* Finestra popup */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        .close {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -28,12 +55,39 @@
 
 <h1>FusionDex</h1>
 
-<div class="card">
-    <h2>#001 Alakazario</h2>
+<!-- CARD -->
+<div class="card" onclick="openModal()">
+    <h3>#001</h3>
     <img src="Alakazario.png" alt="Alakazario">
-    <p><strong>Tipo:</strong> Buio / Lotta</p>
-    <p>Descrizione da aggiungere</p>
+    <h2>Alakazario</h2>
 </div>
+
+<!-- MODALE -->
+<div id="pokemonModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>#001 Alakazario</h2>
+        <p><strong>Tipo:</strong> Buio / Lotta</p>
+        <p>Qui puoi scrivere la descrizione completa del tuo Pokémon fusione.</p>
+    </div>
+</div>
+
+<script>
+function openModal() {
+    document.getElementById("pokemonModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("pokemonModal").style.display = "none";
+}
+
+window.onclick = function(event) {
+    var modal = document.getElementById("pokemonModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 
 </body>
 </html>
