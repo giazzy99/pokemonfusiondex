@@ -31,11 +31,10 @@
         }
 
         /* IMMAGINE DELLA CARD RIDOTTA DEL 50% */
-       .card img {
-    width: 50%; /* metà della card */
-    max-width: 150px; /* non supera la dimensione originale */
-    transition: transform 0.2s;
-}
+        .card img {
+            width: 75px !important; /* 150px originale ÷ 2 = 50% */
+            transition: transform 0.2s;
+        }
 
         /* MODALE */
         .modal {
@@ -72,6 +71,7 @@
             font-size: 20px;
             cursor: pointer;
         }
+
     </style>
 </head>
 
@@ -114,6 +114,7 @@ function closeModal() {
     document.getElementById("pokemonModal").style.display = "none";
 }
 
+// Chiude la modale cliccando fuori dalla finestra
 window.onclick = function(event) {
     var modal = document.getElementById("pokemonModal");
     if (event.target == modal) {
