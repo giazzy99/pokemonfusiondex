@@ -50,16 +50,17 @@
 
         /* MODALE CON BORDO ROSSO POKEDEX */
         .modal-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
-            width: 300px;
-            border-radius: 10px;
-            position: relative;
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    position: relative;
 
-            /* BORDO ROSSO POKEDEX */
-            border: 4px solid #FF0000;  /* rosso pokédex */
-        }
+    /* BORDO ROSSO POKEDEX */
+    border: 4px solid #FF0000 !important; /* forza il bordo rosso su tutti i lati */
+    box-sizing: border-box; /* assicura che il bordo non modifichi la larghezza */
+}
 
         /* Miniatura 1:3 dentro la modale */
         .modal-img {
