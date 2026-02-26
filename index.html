@@ -139,7 +139,6 @@
         .card {
             background: white;
             border-radius: 10px;
-            padding: 15px 10px;
             text-align: center;
             cursor: pointer;
             position: relative;
@@ -149,8 +148,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 220px;  /* per ospitare immagine triplicata */
-            height: 300px;
+            width: 220px;  
+            height: 320px; /* leggermente più alto per dare spazio all’immagine */
+            padding: 10px;
+
+            /* Hover pop */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
         /* Pokeball stilizzata 45% */
@@ -177,9 +185,11 @@
             z-index: 1;
         }
 
+        /* Immagine centrata e più grande */
         .card img {
-            width: 210px; /* 70px × 3 */
+            width: 210px; /* triplo rispetto a prima */
             margin-bottom: 10px;
+            align-self: center;
         }
 
         /* Nome Pokémon su una riga sola, font adattivo */
@@ -220,7 +230,7 @@
         }
 
         .modal-img {
-            width: 200px; /* 50px × 4 */
+            width: 200px; /* quadruplicata */
             display: block;
             margin: 0 auto 10px auto;
         }
