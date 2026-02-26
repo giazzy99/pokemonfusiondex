@@ -139,7 +139,7 @@
         .card {
             background: white;
             border-radius: 10px;
-            padding: 15px 10px; /* padding orizzontale maggiore per non toccare bordi */
+            padding: 15px 10px;
             text-align: center;
             cursor: pointer;
             position: relative;
@@ -190,14 +190,18 @@
 
         .card img {
             width: 70px;
-            margin-bottom: 10px; /* spazio tra immagine e nome */
+            margin-bottom: 10px;
         }
 
+        /* Nome Pokémon su una riga sola */
         .card h2 {
             margin: 0;
             padding: 0;
-            word-break: break-word;
+            white-space: nowrap;       /* non va a capo */
+            overflow: hidden;          /* taglia se troppo lungo */
+            text-overflow: ellipsis;   /* aggiunge "..." se tagliato */
             text-align: center;
+            width: 100%;
         }
 
         /* =========================
@@ -272,7 +276,7 @@
         <div class="card" onclick="openModal()" data-name="alakazario">
             <h3>#001</h3>
             <img src="Alakazario.png" alt="Alakazario">
-            <h2>Alakazario</h2>
+            <h2>AlakazarioSuperLungo</h2>
         </div>
 
     </div>
