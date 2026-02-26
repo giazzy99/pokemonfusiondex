@@ -139,14 +139,17 @@
         .card {
             background: white;
             border-radius: 10px;
-            padding: 15px;
+            padding: 15px 10px; /* padding orizzontale maggiore per non toccare bordi */
             text-align: center;
             cursor: pointer;
             position: relative;
             overflow: hidden;
             border: 4px solid #FF0000;
-            font-family: 'Press Start 2P', cursive; /* FONT UNIFICATO */
+            font-family: 'Press Start 2P', cursive;
             font-size: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Pokeball stilizzata 45% */
@@ -187,6 +190,14 @@
 
         .card img {
             width: 70px;
+            margin-bottom: 10px; /* spazio tra immagine e nome */
+        }
+
+        .card h2 {
+            margin: 0;
+            padding: 0;
+            word-break: break-word;
+            text-align: center;
         }
 
         /* =========================
