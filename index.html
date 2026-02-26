@@ -157,7 +157,7 @@
             text-align: center;
         }
 
-        /* Animazione fluttuante continua del Pokémon nel popup */
+        /* Animazione verticale continua del Pokémon nel popup */
         .modal-img {
             width: 200px;
             position: relative;
@@ -166,10 +166,23 @@
             margin: 0 auto;
             animation: floatUpDown 3s ease-in-out infinite;
         }
+        /* Effetto oscillazione destra-sinistra al passaggio del mouse */
+        .modal-img:hover {
+            animation: floatUpDown 3s ease-in-out infinite, shakeHorizontal 0.5s ease-in-out infinite;
+        }
+
         @keyframes floatUpDown {
             0% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0); }
+        }
+
+        @keyframes shakeHorizontal {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(5px); }
+            50% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
         }
 
         .close {
