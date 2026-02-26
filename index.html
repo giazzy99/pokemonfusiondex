@@ -13,7 +13,10 @@
             background-color: #0b2a4a;
         }
 
-        /* HEADER */
+        /* =========================
+           HEADER
+        ========================== */
+
         .pokedex-header {
             background: linear-gradient(135deg, #aa0000 0%, #cc0000 35%, #ff0000 60%, #aa0000 100%);
             height: 90px;
@@ -60,6 +63,7 @@
         .light.yellow { background: #ffcc00; }
         .light.green { background: #33cc33; }
 
+        /* Pokeball header */
         .pokeball {
             position: absolute;
             right: 20px;
@@ -102,7 +106,10 @@
             transform: translate(-50%, -50%);
         }
 
-        /* SEARCH BAR */
+        /* =========================
+           SEARCH BAR
+        ========================== */
+
         .search-container {
             background: white;
             padding: 15px;
@@ -118,7 +125,10 @@
             outline: none;
         }
 
-        /* CARD GRID */
+        /* =========================
+           CARD GRID
+        ========================== */
+
         .card-container {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -139,16 +149,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 140px;  /* larghezza fissa */
-            height: 180px; /* altezza fissa verticale */
+            width: 220px;  /* per ospitare immagine triplicata */
+            height: 300px;
         }
 
         /* Pokeball stilizzata 45% */
         .card::before {
             content: "";
             position: absolute;
-            width: 120px;
-            height: 120px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             top: 50%;
             left: 50%;
@@ -168,18 +178,18 @@
         }
 
         .card img {
-            width: 70px;
+            width: 210px; /* 70px × 3 */
             margin-bottom: 10px;
         }
 
-        /* Nome Pokémon su una riga sola con font adattivo */
+        /* Nome Pokémon su una riga sola, font adattivo */
         .card h2 {
             margin: 0;
             padding: 0 5px;
-            white-space: nowrap;       /* non va a capo */
+            white-space: nowrap;
             overflow: visible;
             text-align: center;
-            font-size: clamp(8px, 10px, 12px); /* riduce se necessario */
+            font-size: clamp(8px, 12px, 14px);
             width: 100%;
         }
 
@@ -200,16 +210,17 @@
             margin: 10% auto;
             padding: 20px;
             width: auto;
-            max-width: 350px;
+            max-width: 500px;
             border-radius: 10px;
             position: relative;
             border: 4px solid #FFD700; /* giallo */
             font-family: 'Press Start 2P', cursive;
             font-size: 10px;
+            text-align: center;
         }
 
         .modal-img {
-            width: 50px;
+            width: 200px; /* 50px × 4 */
             display: block;
             margin: 0 auto 10px auto;
         }
