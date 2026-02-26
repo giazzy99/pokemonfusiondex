@@ -3,10 +3,7 @@
 <head>
     <title>FusionDex</title>
 
-    <!-- FAVICON -->
     <link rel="icon" href="Pika.png" type="image/png">
-
-    <!-- FONT PIXELLATO -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
@@ -23,45 +20,41 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             border-bottom: 4px solid #660000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
+
         .pokedex-header h1 {
-            font-family: 'Press Start 2P', cursive;
             color: white;
             font-size: 18px;
             margin: 0;
             text-shadow: 3px 3px 0 #660000;
         }
 
-        /* SEARCH BAR */
+        /* SEARCH */
         .search-container {
             background: white;
             padding: 15px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            position: relative;
         }
+
         .search-container input {
             width: 300px;
             padding: 10px;
-            font-family: 'Press Start 2P', cursive;
+            font-family: 'Press Start 2P';
             font-size: 10px;
             border: 3px solid #cc0000;
             outline: none;
-            z-index: 1;
-            background: white;
         }
 
-        /* CARD GRID */
+        /* GRID */
         .card-container {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 20px;
             padding: 30px;
         }
+
         .card {
             background: white;
             border-radius: 10px;
@@ -73,15 +66,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; 
+            justify-content: center;
+            transition: 0.2s;
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
         .card:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
-        /* Pokeball sfondo card con trasparenza 66% */
+
+        /* Pokeball 66% */
         .card::before {
             content: "";
             position: absolute;
@@ -91,39 +85,45 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(to bottom, rgba(204,0,0,0.66) 50%, rgba(255,255,255,0.66) 50%);
+            background: linear-gradient(
+                to bottom,
+                rgba(204,0,0,0.66) 50%,
+                rgba(255,255,255,0.66) 50%
+            );
             border: 4px solid rgba(0,0,0,0.66);
             z-index: 0;
         }
+
         .card img {
             width: 210px;
             position: relative;
             z-index: 1;
-            object-fit: contain;
         }
+
         .card h2, .card h3 {
             position: relative;
             z-index: 1;
-            margin: 0;
-            padding: 0 5px;
+            margin: 5px 0;
             text-align: center;
         }
+
         .card h2 {
+            font-size: 11px;
             white-space: nowrap;
-            font-size: clamp(8px, 12px, 14px);
         }
 
         /* MODAL */
         .modal {
             display: none;
             position: fixed;
-            z-index: 10;
+            z-index: 100;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.6);
         }
+
         .modal-content {
             background-image: url('Sfogri.jfif');
             background-size: cover;
@@ -132,39 +132,40 @@
             padding: 20px;
             max-width: 350px;
             border-radius: 10px;
-            position: relative;
             border: 4px solid #FFD700;
             text-align: center;
+            position: relative;
         }
+
         .modal-img {
             width: 200px;
-            position: relative;
-            z-index: 1;
-            display: block;
             margin: 0 auto;
-            animation: floatUpDown 3s ease-in-out infinite;
+            display: block;
+            animation: float 3s ease-in-out infinite;
         }
-        .modal-img:hover {
-            animation: floatUpDown 3s ease-in-out infinite, shakeHorizontal 0.5s ease-in-out infinite;
-        }
-        @keyframes floatUpDown {
+
+        @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0); }
         }
-        @keyframes shakeHorizontal {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(5px); }
-            50% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-            100% { transform: translateX(0); }
+
+        .modal-img:hover {
+            animation: float 3s ease-in-out infinite, shake 0.4s infinite;
         }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+            100% { transform: translateX(-6px); }
+        }
+
         .close {
             position: absolute;
             right: 15px;
             top: 10px;
-            font-size: 14px;
             cursor: pointer;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -179,64 +180,88 @@
 </div>
 
 <div class="card-container">
+
     <!-- CARD 1 -->
-    <div class="card" onclick="openModal()" data-name="alakazario">
+    <div class="card"
+         onclick="openModal(this)"
+         data-number="#001"
+         data-name="Alakazario"
+         data-img="Alakazario.png"
+         data-type="Buio / Lotta"
+         data-desc="Fusione psichica letale nata dal caos.">
+
         <h3>#001</h3>
-        <img src="Alakazario.png" alt="Alakazario">
+        <img src="Alakazario.png">
         <h2>Alakazario</h2>
     </div>
 
-    <!-- CARD 2 (Generica) -->
-    <div class="card" onclick="openModal()" data-name="CHAPRAS">
+    <!-- CARD 2 -->
+    <div class="card"
+         onclick="openModal(this)"
+         data-number="#002"
+         data-name="FusionX"
+         data-img="Alakazario.png"
+         data-type="Fuoco / Drago"
+         data-desc="Creatura ardente generata da due titani.">
+
         <h3>#002</h3>
-        <img src=CHAPRAS.png" alt="CHAPRAS">
-        <h2>Pokemon2</h2>
+        <img src="Alakazario.png">
+        <h2>FusionX</h2>
     </div>
 
-    <!-- CARD 3 (Generica) -->
-    <div class="card" onclick="openModal()" data-name="DORYGON Z">
-        <h3>#003</h3>
-        <img src="DORYGON Z.png" alt="DORYGON Z">
-        <h2>Pokemon3</h2>
-    </div>
-
-    <!-- CARD 4 (Generica) -->
-    <div class="card" onclick="openModal()" data-name="MEGARIG">
-        <h3>#004</h3>
-        <img src="MEGARIG.png" alt="MEGARIG">
-        <h2>Pokemon4</h2>
-    </div>
 </div>
 
+<!-- MODAL UNICA DINAMICA -->
 <div id="pokemonModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h2>#001 Alakazario</h2>
-        <img src="Alakazario.png" class="modal-img">
-        <p><strong>Tipo:</strong> Buio / Lotta</p>
-        <p>Descrizione dettagliata della fusione Pokémon limitata a 60 caratteri.</p>
+        <h2 id="modalTitle"></h2>
+        <img id="modalImage" class="modal-img">
+        <p><strong>Tipo:</strong> <span id="modalType"></span></p>
+        <p id="modalDesc"></p>
     </div>
 </div>
 
 <script>
-    function openModal() { document.getElementById("pokemonModal").style.display = "block"; }
-    function closeModal() { document.getElementById("pokemonModal").style.display = "none"; }
-    function searchPokemon() {
-        let input = document.getElementById("searchInput").value.toLowerCase();
-        let cards = document.getElementsByClassName("card");
-        for (let i=0;i<cards.length;i++){
-            let name = cards[i].getAttribute("data-name");
-            cards[i].style.display = name.includes(input) ? "flex" : "none";
-        }
-    }
-    window.onclick = function(event) {
-        let modal = document.getElementById("pokemonModal");
-        if(event.target==modal) modal.style.display="none";
-    }
 
-    // ❌ DISABILITA CLIC DESTRO E DRAG DELLE IMMAGINI
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.addEventListener('dragstart', event => event.preventDefault());
+function openModal(card) {
+    document.getElementById("modalTitle").innerText =
+        card.dataset.number + " " + card.dataset.name;
+
+    document.getElementById("modalImage").src =
+        card.dataset.img;
+
+    document.getElementById("modalType").innerText =
+        card.dataset.type;
+
+    document.getElementById("modalDesc").innerText =
+        card.dataset.desc;
+
+    document.getElementById("pokemonModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("pokemonModal").style.display = "none";
+}
+
+function searchPokemon() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.getElementsByClassName("card");
+
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].dataset.name.toLowerCase();
+        cards[i].style.display = name.includes(input) ? "flex" : "none";
+    }
+}
+
+window.onclick = function(event) {
+    let modal = document.getElementById("pokemonModal");
+    if(event.target == modal) modal.style.display="none";
+}
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+
 </script>
 
 </body>
