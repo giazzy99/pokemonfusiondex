@@ -157,21 +157,18 @@
             text-align: center;
         }
 
+        /* Animazione fluttuante continua del Pokémon nel popup */
         .modal-img {
             width: 200px;
             position: relative;
             z-index: 1;
             display: block;
             margin: 0 auto;
-            transition: transform 0.2s ease;
+            animation: floatUpDown 3s ease-in-out infinite;
         }
-        .modal-img:hover {
-            animation: moveUpDown 0.6s infinite;
-        }
-        @keyframes moveUpDown {
+        @keyframes floatUpDown {
             0% { transform: translateY(0); }
-            33% { transform: translateY(-10px); }
-            66% { transform: translateY(10px); }
+            50% { transform: translateY(-15px); }
             100% { transform: translateY(0); }
         }
 
