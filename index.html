@@ -3,17 +3,14 @@
 <head>
     <title>FusionDex</title>
 
+    <!-- Font pixellato -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --red: #FF0000;
-        }
-
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
-            margin: 0;
             text-align: center;
         }
 
@@ -21,54 +18,89 @@
            HEADER POKEDEX
         ========================== */
 
-        header {
-            background: linear-gradient(135deg, #aa0000 0%, #cc0000 35%, var(--red) 60%, #aa0000 100%);
-            min-height: 80px;
-            padding: 10px 20px;
+        .pokedex-header {
+            background: linear-gradient(135deg, #aa0000 0%, #cc0000 35%, #ff0000 60%, #aa0000 100%);
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             border-bottom: 4px solid #660000;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
 
-        /* LUCE BLU SINISTRA */
-        .header-light {
-            border-radius: 50%;
-            position: absolute;
-            left: 20px;
-        }
-
-        .header-light.big {
-            width: 42px;
-            height: 42px;
-            background: radial-gradient(circle at 33% 33%, #aaeeff, #0077cc 70%);
-            border: 3px solid #004488;
-            box-shadow: 0 0 14px #00aaff88,
-                        inset 0 -2px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        /* TITOLO PIXEL CENTRATO */
-        header h1 {
-            color: white;
-            margin: 0;
+        .pokedex-header h1 {
             font-family: 'Press Start 2P', cursive;
+            color: white;
             font-size: 18px;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 0 #660000;
+            margin: 0;
+            text-shadow: 3px 3px 0 #660000;
         }
 
-        /* POKEBALL TOP DESTRA */
-        .pokeball-top {
+        /* Luci sinistra */
+        .header-left {
             position: absolute;
-            right: 0;
-            top: 0;
-            width: 80px;
-            height: 100%;
-            background: #cc0000;
-            border-left: 3px solid #660000;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .light.big {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #aaeeff, #0077cc 70%);
+            border: 3px solid #004488;
+            box-shadow: 0 0 14px #00aaff88,
+                        inset 0 -2px 6px rgba(0,0,0,0.4);
+        }
+
+        .light.small {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #222;
+        }
+
+        .light.red { background: #ff3333; }
+        .light.yellow { background: #ffcc00; }
+        .light.green { background: #33cc33; }
+
+        /* Pokeball destra */
+        .pokeball {
+            position: absolute;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(to bottom, #cc0000 50%, white 50%);
+            border-radius: 50%;
+            border: 4px solid black;
+        }
+
+        .pokeball::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: black;
+            transform: translateY(-50%);
+        }
+
+        .pokeball::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border: 4px solid black;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
         }
 
         /* =========================
@@ -78,7 +110,7 @@
         .card {
             background: white;
             width: 200px;
-            margin: 30px;
+            margin: 40px;
             padding: 15px;
             border-radius: 10px;
             display: inline-block;
@@ -148,18 +180,28 @@
 
 <body>
 
-    <header>
-        <div class="header-light big"></div>
+    <!-- HEADER -->
+    <header class="pokedex-header">
+        <div class="header-left">
+            <div class="light big"></div>
+            <div class="light small red"></div>
+            <div class="light small yellow"></div>
+            <div class="light small green"></div>
+        </div>
+
         <h1>FusionDex</h1>
-        <div class="pokeball-top"></div>
+
+        <div class="pokeball"></div>
     </header>
 
+    <!-- CARD -->
     <div class="card" onclick="openModal()">
         <h3>#001</h3>
         <img src="Alakazario.png" alt="Alakazario">
         <h2>Alakazario</h2>
     </div>
 
+    <!-- MODALE -->
     <div id="pokemonModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
