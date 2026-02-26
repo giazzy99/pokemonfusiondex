@@ -13,10 +13,7 @@
             background-color: #0b2a4a;
         }
 
-        /* =========================
-           HEADER
-        ========================== */
-
+        /* HEADER */
         .pokedex-header {
             background: linear-gradient(135deg, #aa0000 0%, #cc0000 35%, #ff0000 60%, #aa0000 100%);
             height: 90px;
@@ -63,7 +60,6 @@
         .light.yellow { background: #ffcc00; }
         .light.green { background: #33cc33; }
 
-        /* Pokeball header */
         .pokeball {
             position: absolute;
             right: 20px;
@@ -106,10 +102,7 @@
             transform: translate(-50%, -50%);
         }
 
-        /* =========================
-           SEARCH BAR
-        ========================== */
-
+        /* SEARCH BAR */
         .search-container {
             background: white;
             padding: 15px;
@@ -125,17 +118,12 @@
             outline: none;
         }
 
-        /* =========================
-           CARD GRID
-        ========================== */
-
+        /* CARD GRID */
         .card-container {
             display: grid;
-            grid-auto-flow: row;
-            grid-template-columns: repeat(7, auto);
+            grid-template-columns: repeat(7, 1fr);
             gap: 20px;
             padding: 30px;
-            justify-content: start;
         }
 
         .card {
@@ -146,13 +134,13 @@
             cursor: pointer;
             position: relative;
             overflow: visible;
-            border: 4px solid #FFD700; /* contorno giallo */
+            border: 4px solid #FFD700; /* contorno giallo Pokémon */
             font-family: 'Press Start 2P', cursive;
-            font-size: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 120px; /* larghezza minima */
+            width: 140px;  /* larghezza fissa */
+            height: 180px; /* altezza fissa verticale */
         }
 
         /* Pokeball stilizzata 45% */
@@ -174,18 +162,6 @@
             z-index: 0;
         }
 
-        .card::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(0,0,0,0.45);
-            transform: translateY(-50%);
-            z-index: 0;
-        }
-
         .card img, .card h2, .card h3 {
             position: relative;
             z-index: 1;
@@ -196,18 +172,18 @@
             margin-bottom: 10px;
         }
 
-        /* Nome Pokémon tutto visibile, non a capo */
+        /* Nome Pokémon su una riga sola con font adattivo */
         .card h2 {
             margin: 0;
             padding: 0 5px;
-            white-space: nowrap;
+            white-space: nowrap;       /* non va a capo */
+            overflow: visible;
             text-align: center;
+            font-size: clamp(8px, 10px, 12px); /* riduce se necessario */
+            width: 100%;
         }
 
-        /* =========================
-           MODAL
-        ========================== */
-
+        /* MODAL */
         .modal {
             display: none;
             position: fixed;
@@ -227,7 +203,7 @@
             max-width: 350px;
             border-radius: 10px;
             position: relative;
-            border: 4px solid #FFD700; /* contorno giallo */
+            border: 4px solid #FFD700; /* giallo */
             font-family: 'Press Start 2P', cursive;
             font-size: 10px;
         }
