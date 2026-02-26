@@ -10,8 +10,7 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0b2a4a; /* Blu scuro stile Windows */
+            background-color: #0b2a4a;
         }
 
         /* =========================
@@ -146,9 +145,11 @@
             position: relative;
             overflow: hidden;
             border: 4px solid #FF0000;
+            font-family: 'Press Start 2P', cursive; /* FONT UNIFICATO */
+            font-size: 10px;
         }
 
-        /* Pokeball trasparente dentro card */
+        /* Pokeball stilizzata 45% */
         .card::before {
             content: "";
             position: absolute;
@@ -158,10 +159,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: 
-                linear-gradient(to bottom, rgba(204,0,0,0.3) 50%, rgba(255,255,255,0.3) 50%);
-            border: 4px solid rgba(0,0,0,0.3);
-            opacity: 0.3;
+            background:
+                linear-gradient(to bottom,
+                    rgba(204,0,0,0.45) 50%,
+                    rgba(255,255,255,0.45) 50%);
+            border: 4px solid rgba(0,0,0,0.45);
+            opacity: 0.45;
             z-index: 0;
         }
 
@@ -172,7 +175,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.45);
             transform: translateY(-50%);
             z-index: 0;
         }
@@ -209,6 +212,8 @@
             border-radius: 10px;
             position: relative;
             border: 4px solid #FF0000;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
         }
 
         .modal-img {
@@ -221,7 +226,7 @@
             position: absolute;
             right: 15px;
             top: 10px;
-            font-size: 20px;
+            font-size: 14px;
             cursor: pointer;
         }
 
@@ -230,7 +235,6 @@
 
 <body>
 
-    <!-- HEADER -->
     <header class="pokedex-header">
         <div class="header-left">
             <div class="light big"></div>
@@ -248,12 +252,10 @@
         </div>
     </header>
 
-    <!-- SEARCH BAR -->
     <div class="search-container">
         <input type="text" id="searchInput" placeholder="CERCA POKEMON..." onkeyup="searchPokemon()">
     </div>
 
-    <!-- CARD GRID -->
     <div class="card-container">
 
         <div class="card" onclick="openModal()" data-name="alakazario">
@@ -264,7 +266,6 @@
 
     </div>
 
-    <!-- MODAL -->
     <div id="pokemonModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -276,7 +277,6 @@
     </div>
 
     <script>
-
         function openModal() {
             document.getElementById("pokemonModal").style.display = "block";
         }
@@ -291,11 +291,7 @@
 
             for (let i = 0; i < cards.length; i++) {
                 let name = cards[i].getAttribute("data-name");
-                if (name.includes(input)) {
-                    cards[i].style.display = "block";
-                } else {
-                    cards[i].style.display = "none";
-                }
+                cards[i].style.display = name.includes(input) ? "block" : "none";
             }
         }
 
@@ -305,7 +301,6 @@
                 modal.style.display = "none";
             }
         }
-
     </script>
 
 </body>
