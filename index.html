@@ -86,7 +86,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
-        /* Pokeball sfondo card con trasparenza 45% */
+        /* Pokeball sfondo card con trasparenza 66% */
         .card::before {
             content: "";
             position: absolute;
@@ -96,8 +96,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(to bottom, rgba(204,0,0,0.60) 50%, rgba(255,255,255,0.60) 50%);
-            border: 4px solid rgba(0,0,0,0.60);
+            background: linear-gradient(to bottom, rgba(204,0,0,0.66) 50%, rgba(255,255,255,0.66) 50%);
+            border: 4px solid rgba(0,0,0,0.66);
             z-index: 0;
         }
 
@@ -178,15 +178,19 @@
 
 <div class="search-container">
     <div class="energy-left">
-        <img src="energy1.png">
-        <img src="energy2.png">
-        <img src="energy3.png">
+        <img src="energy_fire.png" alt="Fuoco">
+        <img src="energy_water.png" alt="Acqua">
+        <img src="energy_grass.png" alt="Erba">
+        <img src="energy_lightning.png" alt="Fulmine">
+        <img src="energy_psychic.png" alt="Psico">
     </div>
     <input type="text" id="searchInput" placeholder="CERCA POKEMON..." onkeyup="searchPokemon()">
     <div class="energy-right">
-        <img src="energy3.png">
-        <img src="energy2.png">
-        <img src="energy1.png">
+        <img src="energy_psychic.png" alt="Psico">
+        <img src="energy_lightning.png" alt="Fulmine">
+        <img src="energy_grass.png" alt="Erba">
+        <img src="energy_water.png" alt="Acqua">
+        <img src="energy_fire.png" alt="Fuoco">
     </div>
 </div>
 
