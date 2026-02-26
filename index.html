@@ -6,168 +6,159 @@
     <link rel="icon" href="Pika.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            background-color: #0b2a4a;
-            font-family: 'Press Start 2P', cursive;
-        }
+<style>
 
-        /* HEADER */
-        .pokedex-header {
-            background: linear-gradient(135deg, #aa0000 0%, #cc0000 35%, #ff0000 60%, #aa0000 100%);
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 4px solid #660000;
-        }
+body{
+    margin:0;
+    background:#0b2a4a;
+    font-family:'Press Start 2P',cursive;
+}
 
-        .pokedex-header h1 {
-            color: white;
-            font-size: 18px;
-            margin: 0;
-            text-shadow: 3px 3px 0 #660000;
-        }
+/* HEADER */
+.pokedex-header{
+    background:linear-gradient(135deg,#aa0000,#ff0000);
+    height:90px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-bottom:4px solid #660000;
+}
+.pokedex-header h1{
+    color:white;
+    font-size:18px;
+    text-shadow:3px 3px 0 #660000;
+}
 
-        /* SEARCH */
-        .search-container {
-            background: white;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-        }
+/* SEARCH */
+.search-container{
+    background:white;
+    padding:15px;
+    display:flex;
+    justify-content:center;
+}
+.search-container input{
+    width:300px;
+    padding:10px;
+    font-family:'Press Start 2P';
+    font-size:10px;
+    border:3px solid #cc0000;
+}
 
-        .search-container input {
-            width: 300px;
-            padding: 10px;
-            font-family: 'Press Start 2P';
-            font-size: 10px;
-            border: 3px solid #cc0000;
-            outline: none;
-        }
+/* GRID */
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    padding:40px;
+    justify-items:center;
+}
 
-        /* GRID */
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 20px;
-            padding: 30px;
-        }
+/* CARD */
+.card{
+    background:white;
+    border-radius:10px;
+    border:4px solid #FFD700;
+    width:220px;
+    height:330px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    cursor:pointer;
+    overflow:hidden;
+    transition:0.2s;
+}
+.card:hover{
+    transform:scale(1.05);
+}
 
-        .card {
-            background: white;
-            border-radius: 10px;
-            cursor: pointer;
-            position: relative;
-            border: 4px solid #FFD700;
-            width: 220px;
-            height: 330px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-            overflow: hidden;
-        }
+/* Pokeball 66% */
+.card::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:linear-gradient(to bottom,
+        rgba(204,0,0,0.66) 50%,
+        rgba(255,255,255,0.66) 50%);
+    border:4px solid rgba(0,0,0,0.66);
+    z-index:0;
+}
 
-        .card:hover {
-            transform: scale(1.05);
-        }
+/* IMAGE */
+.card img{
+    width:200px;
+    position:relative;
+    z-index:1;
+}
 
-        /* Pokeball 66% */
-        .card::before {
-            content: "";
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(
-                to bottom,
-                rgba(204,0,0,0.66) 50%,
-                rgba(255,255,255,0.66) 50%
-            );
-            border: 4px solid rgba(0,0,0,0.66);
-            z-index: 0;
-        }
+/* TEXT */
+.card h3,.card h2{
+    position:relative;
+    z-index:1;
+    margin:6px 0;
+    text-align:center;
+}
+.card h2{
+    font-size:11px;
+    white-space:nowrap;
+}
 
-        .card img {
-            width: 210px;
-            position: relative;
-            z-index: 1;
-        }
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:100;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+.modal-content{
+    background-image:url('Sfogri.jfif');
+    background-size:cover;
+    background-position:center;
+    margin:5% auto;
+    padding:20px;
+    max-width:350px;
+    border-radius:10px;
+    border:4px solid #FFD700;
+    text-align:center;
+    position:relative;
+}
+.modal-img{
+    width:200px;
+    margin:0 auto;
+    display:block;
+    animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
+}
+.modal-img:hover{
+    animation:float 3s ease-in-out infinite,shake 0.4s infinite;
+}
+@keyframes shake{
+    0%{transform:translateX(0);}
+    50%{transform:translateX(6px);}
+    100%{transform:translateX(-6px);}
+}
+.close{
+    position:absolute;
+    right:15px;
+    top:10px;
+    cursor:pointer;
+}
 
-        .card h2, .card h3 {
-            position: relative;
-            z-index: 1;
-            margin: 5px 0;
-            text-align: center;
-        }
-
-        .card h2 {
-            font-size: 11px;
-            white-space: nowrap;
-        }
-
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-        }
-
-        .modal-content {
-            background-image: url('Sfogri.jfif');
-            background-size: cover;
-            background-position: center;
-            margin: 5% auto;
-            padding: 20px;
-            max-width: 350px;
-            border-radius: 10px;
-            border: 4px solid #FFD700;
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-img {
-            width: 200px;
-            margin: 0 auto;
-            display: block;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0); }
-        }
-
-        .modal-img:hover {
-            animation: float 3s ease-in-out infinite, shake 0.4s infinite;
-        }
-
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(6px); }
-            100% { transform: translateX(-6px); }
-        }
-
-        .close {
-            position: absolute;
-            right: 15px;
-            top: 10px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-    </style>
+</style>
 </head>
 <body>
 
@@ -181,86 +172,110 @@
 
 <div class="card-container">
 
-    <!-- CARD 1 -->
-    <div class="card"
-         onclick="openModal(this)"
-         data-number="#001"
-         data-name="Alakazario"
-         data-img="Alakazario.png"
-         data-type="Buio / Lotta"
-         data-desc="Fusione psichica letale nata dal caos.">
+<!-- CARD 1 -->
+<div class="card"
+onclick="openModal(this)"
+data-number="#001"
+data-name="Alakazario"
+data-img="Alakazario.png"
+data-type="Buio / Lotta"
+data-desc="Fusione psichica nata dal caos.">
+    <h3>#001</h3>
+    <img src="Alakazario.png">
+    <h2>Alakazario</h2>
+</div>
 
-        <h3>#001</h3>
-        <img src="Alakazario.png">
-        <h2>Alakazario</h2>
-    </div>
+<!-- CARD 2 -->
+<div class="card"
+onclick="openModal(this)"
+data-number="#002"
+data-name="PokemonX"
+data-img="PokemonX.png"
+data-type="Tipo1 / Tipo2"
+data-desc="Descrizione in attesa.">
+    <h3>#002</h3>
+    <img src="PokemonX.png">
+    <h2>PokemonX</h2>
+</div>
 
-    <!-- CARD 2 -->
-    <div class="card"
-         onclick="openModal(this)"
-         data-number="#002"
-         data-name="FusionX"
-         data-img="Alakazario.png"
-         data-type="Fuoco / Drago"
-         data-desc="Creatura ardente generata da due titani.">
+<!-- CARD 3 -->
+<div class="card"
+onclick="openModal(this)"
+data-number="#003"
+data-name="PokemonX"
+data-img="PokemonX.png"
+data-type="Tipo1 / Tipo2"
+data-desc="Descrizione in attesa.">
+    <h3>#003</h3>
+    <img src="PokemonX.png">
+    <h2>PokemonX</h2>
+</div>
 
-        <h3>#002</h3>
-        <img src="Alakazario.png">
-        <h2>FusionX</h2>
-    </div>
+<!-- CARD 4 -->
+<div class="card"
+onclick="openModal(this)"
+data-number="#004"
+data-name="PokemonX"
+data-img="PokemonX.png"
+data-type="Tipo1 / Tipo2"
+data-desc="Descrizione in attesa.">
+    <h3>#004</h3>
+    <img src="PokemonX.png">
+    <h2>PokemonX</h2>
+</div>
 
 </div>
 
-<!-- MODAL UNICA DINAMICA -->
+<!-- MODAL DINAMICA -->
 <div id="pokemonModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2 id="modalTitle"></h2>
-        <img id="modalImage" class="modal-img">
-        <p><strong>Tipo:</strong> <span id="modalType"></span></p>
-        <p id="modalDesc"></p>
-    </div>
+<div class="modal-content">
+<span class="close" onclick="closeModal()">&times;</span>
+<h2 id="modalTitle"></h2>
+<img id="modalImage" class="modal-img">
+<p><strong>Tipo:</strong> <span id="modalType"></span></p>
+<p id="modalDesc"></p>
+</div>
 </div>
 
 <script>
 
-function openModal(card) {
-    document.getElementById("modalTitle").innerText =
-        card.dataset.number + " " + card.dataset.name;
+function openModal(card){
+document.getElementById("modalTitle").innerText =
+card.dataset.number+" "+card.dataset.name;
 
-    document.getElementById("modalImage").src =
-        card.dataset.img;
+document.getElementById("modalImage").src =
+card.dataset.img;
 
-    document.getElementById("modalType").innerText =
-        card.dataset.type;
+document.getElementById("modalType").innerText =
+card.dataset.type;
 
-    document.getElementById("modalDesc").innerText =
-        card.dataset.desc;
+document.getElementById("modalDesc").innerText =
+card.dataset.desc;
 
-    document.getElementById("pokemonModal").style.display = "block";
+document.getElementById("pokemonModal").style.display="block";
 }
 
-function closeModal() {
-    document.getElementById("pokemonModal").style.display = "none";
+function closeModal(){
+document.getElementById("pokemonModal").style.display="none";
 }
 
-function searchPokemon() {
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let cards = document.getElementsByClassName("card");
+function searchPokemon(){
+let input=document.getElementById("searchInput").value.toLowerCase();
+let cards=document.getElementsByClassName("card");
 
-    for (let i = 0; i < cards.length; i++) {
-        let name = cards[i].dataset.name.toLowerCase();
-        cards[i].style.display = name.includes(input) ? "flex" : "none";
-    }
+for(let i=0;i<cards.length;i++){
+let name=cards[i].dataset.name.toLowerCase();
+cards[i].style.display=name.includes(input)?"flex":"none";
+}
 }
 
-window.onclick = function(event) {
-    let modal = document.getElementById("pokemonModal");
-    if(event.target == modal) modal.style.display="none";
+window.onclick=function(event){
+let modal=document.getElementById("pokemonModal");
+if(event.target==modal) modal.style.display="none";
 }
 
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('dragstart', e => e.preventDefault());
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('dragstart',e=>e.preventDefault());
 
 </script>
 
