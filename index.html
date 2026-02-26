@@ -4,7 +4,7 @@
     <title>FusionDex</title>
 
     <!-- FAVICON -->
-    <link rel="icon" href="PIKA.png" type="image/png">
+    <link rel="icon" href="Pika.png" type="image/png">
 
     <!-- FONT PIXELLATO -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -230,20 +230,25 @@
 </div>
 
 <script>
-function openModal() { document.getElementById("pokemonModal").style.display = "block"; }
-function closeModal() { document.getElementById("pokemonModal").style.display = "none"; }
-function searchPokemon() {
-    let input = document.getElementById("searchInput").value.toLowerCase();
-    let cards = document.getElementsByClassName("card");
-    for (let i=0;i<cards.length;i++){
-        let name = cards[i].getAttribute("data-name");
-        cards[i].style.display = name.includes(input) ? "flex" : "none";
+    // Funzioni popup e ricerca
+    function openModal() { document.getElementById("pokemonModal").style.display = "block"; }
+    function closeModal() { document.getElementById("pokemonModal").style.display = "none"; }
+    function searchPokemon() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let cards = document.getElementsByClassName("card");
+        for (let i=0;i<cards.length;i++){
+            let name = cards[i].getAttribute("data-name");
+            cards[i].style.display = name.includes(input) ? "flex" : "none";
+        }
     }
-}
-window.onclick = function(event) {
-    let modal = document.getElementById("pokemonModal");
-    if(event.target==modal) modal.style.display="none";
-}
+    window.onclick = function(event) {
+        let modal = document.getElementById("pokemonModal");
+        if(event.target==modal) modal.style.display="none";
+    }
+
+    // ❌ DISABILITA CLIC DESTRO E DRAG DELLE IMMAGINI
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('dragstart', event => event.preventDefault());
 </script>
 
 </body>
