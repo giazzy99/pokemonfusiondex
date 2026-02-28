@@ -168,11 +168,9 @@ right:15px;
 top:10px;
 cursor:pointer;
 font-size:16px;
-color:black;
 }
 
-/* ===== TIPO POKEMON ===== */
-
+/* TIPO */
 .modal-type-container{
 margin-top:15px;
 text-align:center;
@@ -223,17 +221,102 @@ font-weight:bold;
 </div>
 
 <div class="card-container">
-<!-- LE TUE 8 CARD RESTANO IDENTICHE -->
-<!-- (Non le riscrivo per accorciare, puoi lasciare le tue così come sono) -->
+
+<!-- CARD 1 -->
+<div class="card" onclick="openModal(this)"
+data-number="#001" data-name="Alakazario"
+data-img="Alakazario.png"
+data-type="Buio / Lotta"
+data-desc="E' matto fracico...">
+<h3>#001</h3>
+<img src="Alakazario.png">
+<h2>Alakazario</h2>
+</div>
+
+<!-- CARD 2 -->
+<div class="card" onclick="openModal(this)"
+data-number="#002" data-name="Chapras"
+data-img="Chapras.png"
+data-type="Fuoco / Drago"
+data-desc="Sta tutto infuocato...">
+<h3>#002</h3>
+<img src="Chapras.png">
+<h2>Chapras</h2>
+</div>
+
+<!-- CARD 3 -->
+<div class="card" onclick="openModal(this)"
+data-number="#003" data-name="Dorygon Z"
+data-img="Dorygon Z.png"
+data-type="Psico / Ghiaccio"
+data-desc="Un branco de tre papere...">
+<h3>#003</h3>
+<img src="Dorygon Z.png">
+<h2>Dorygon Z</h2>
+</div>
+
+<!-- CARD 4 -->
+<div class="card" onclick="openModal(this)"
+data-number="#004" data-name="Megarig"
+data-img="Megarig.png"
+data-type="Erba"
+data-desc="Creatura turbolenta.">
+<h3>#004</h3>
+<img src="Megarig.png">
+<h2>Megarig</h2>
+</div>
+
+<!-- CARD 5 -->
+<div class="card" onclick="openModal(this)"
+data-number="#005" data-name="Troparia"
+data-img="Troparia.png"
+data-type="Erba / Roccia"
+data-desc="No description now.">
+<h3>#005</h3>
+<img src="Troparia.png">
+<h2>Troparia</h2>
+</div>
+
+<!-- CARD 6 -->
+<div class="card" onclick="openModal(this)"
+data-number="#006" data-name="Girandoom"
+data-img="Girandoom.png"
+data-type="Elettro"
+data-desc="No description now.">
+<h3>#006</h3>
+<img src="Girandoom.png">
+<h2>Girandoom</h2>
+</div>
+
+<!-- CARD 7 -->
+<div class="card" onclick="openModal(this)"
+data-number="#007" data-name="Glizor"
+data-img="Glizor.png"
+data-type="Volante / Veleno"
+data-desc="No description now.">
+<h3>#007</h3>
+<img src="Glizor.png">
+<h2>Glizor</h2>
+</div>
+
+<!-- CARD 8 -->
+<div class="card" onclick="openModal(this)"
+data-number="#008" data-name="Lightyena"
+data-img="Lightyena.png"
+data-type="Buio"
+data-desc="No description now.">
+<h3>#008</h3>
+<img src="Lightyena.png">
+<h2>Lightyena</h2>
+</div>
+
 </div>
 
 <!-- MODAL -->
 <div id="pokemonModal" class="modal">
 <div class="modal-content">
 <span class="close" onclick="closeModal()">&times;</span>
-
 <h2 id="modalTitle"></h2>
-
 <img id="modalImage" class="modal-img">
 
 <div class="modal-type-container">
@@ -242,14 +325,12 @@ font-weight:bold;
 </div>
 
 <p id="modalDesc"></p>
-
 </div>
 </div>
 
 <script>
 
 function openModal(card){
-
 document.getElementById("modalTitle").innerText=
 card.dataset.number+" "+card.dataset.name;
 
@@ -262,7 +343,6 @@ let typeElem=document.getElementById("modalType");
 typeElem.innerText=rawType;
 typeElem.className="modal-type-value";
 
-/* Applica colore basato sul primo tipo */
 let primoTipo=rawType.split("/")[0].trim();
 let className="type-"+primoTipo.replace(/\s+/g,"");
 typeElem.classList.add(className);
@@ -280,7 +360,6 @@ document.getElementById("pokemonModal").style.display="none";
 function searchPokemon(){
 let input=document.getElementById("searchInput").value.toLowerCase();
 let cards=document.getElementsByClassName("card");
-
 for(let i=0;i<cards.length;i++){
 let name=cards[i].dataset.name.toLowerCase();
 cards[i].style.display=name.includes(input)?"flex":"none";
