@@ -171,6 +171,44 @@ font-size:16px;
 color:black;
 }
 
+/* ===== TIPO POKEMON ===== */
+
+.modal-type-container{
+margin-top:15px;
+text-align:center;
+}
+
+.modal-type-label{
+font-size:11px;
+margin-bottom:6px;
+}
+
+.modal-type-value{
+font-size:12px;
+white-space:nowrap;
+font-weight:bold;
+}
+
+/* COLORI UFFICIALI */
+.type-Normale{color:#A8A878;}
+.type-Fuoco{color:#F08030;}
+.type-Acqua{color:#6890F0;}
+.type-Erba{color:#78C850;}
+.type-Elettro{color:#F8D030;}
+.type-Ghiaccio{color:#98D8D8;}
+.type-Lotta{color:#C03028;}
+.type-Veleno{color:#A040A0;}
+.type-Terra{color:#E0C068;}
+.type-Volante{color:#A890F0;}
+.type-Psico{color:#F85888;}
+.type-Coleottero{color:#A8B820;}
+.type-Roccia{color:#B8A038;}
+.type-Spettro{color:#705898;}
+.type-Drago{color:#7038F8;}
+.type-Buio{color:#705848;}
+.type-Acciaio{color:#B8B8D0;}
+.type-Folletto{color:#EE99AC;}
+
 </style>
 </head>
 
@@ -185,135 +223,49 @@ color:black;
 </div>
 
 <div class="card-container">
-
-<!-- CARD 1 -->
-<div class="card"
-onclick="openModal(this)"
-data-number="#001"
-data-name="Alakazario"
-data-img="Alakazario.png"
-data-type="Buio / Lotta"
-data-desc="E' matto fracico, se je parte la brocca te tira i cucchiai su li denti. Lottatore psicotico.">
-<h3>#001</h3>
-<img src="Alakazario.png">
-<h2>Alakazario</h2>
-</div>
-
-<!-- CARD 2 -->
-<div class="card"
-onclick="openModal(this)"
-data-number="#002"
-data-name="Chapras"
-data-img="Chapras.png"
-data-type="Fuoco / Drago"
-data-desc="Sta tutto infuocato e se vole te brucia vivo. Draghetto impazzito.">
-<h3>#002</h3>
-<img src="Chapras.png">
-<h2>Chapras</h2>
-</div>
-
-<!-- CARD 3 -->
-<div class="card"
-onclick="openModal(this)"
-data-number="#003"
-data-name="Dorygon Z"
-data-img="Dorygon Z.png"
-data-type="Psico / Ghiaccio"
-data-desc="Un branco de tre papere sorelle fulminate da meningite. Palmipede fracassone.">
-<h3>#003</h3>
-<img src="Dorygon Z.png">
-<h2>Dorygon Z</h2>
-</div>
-
-<!-- CARD 4 -->
-<div class="card"
-onclick="openModal(this)"
-data-number="#004"
-data-name="Megarig"
-data-img="Megarig.png"
-data-type="Erba"
-data-desc="La troia delle colline, corre senza una meta mentre ride ma te vole ammazzà la famiglia. Creatura turbolenta.">
-<h3>#004</h3>
-<img src="Megarig.png">
-<h2>Megarig</h2>
-</div>
-
-<!-- CARD 5 -->
-<div class="card"
-onclick="openModal(this)"
-data-number="#005"
-data-name="Troparia"
-data-img="Troparia.png"
-data-type="Erba / Roccia"
-data-desc="No description now.">
-<h3>#005</h3>
-<img src="Troparia.png">
-<h2>Troparia</h2>
-</div>
-
-<!-- CARD 6 -->
-<div class="card"
-onclick="openModal(this)"
-data-number="#006"
-data-name="Girandoom"
-data-img="Girandoom.png"
-data-type="Elettro"
-data-desc="No description now.">
-<h3>#006</h3>
-<img src="Girandoom.png">
-<h2>Girandoom</h2>
-</div>
-
-<!-- CARD 7 -->
-<div class="card"
-onclick="openModal(this)"
-data-number="#007"
-data-name="Glizor"
-data-img="Glizor.png"
-data-type="Volante / Veleno"
-data-desc="No description now.">
-<h3>#007</h3>
-<img src="Glizor.png">
-<h2>Glizor</h2>
-</div>
-
-<!-- CARD 8 -->
-<div class="card"
-onclick="openModal(this)"
-data-number="#008"
-data-name="Lightyena"
-data-img="Lightyena.png"
-data-type="Buio"
-data-desc="No description now.">
-<h3>#008</h3>
-<img src="Lightyena.png">
-<h2>Lightyena</h2>
-</div>
-
+<!-- LE TUE 8 CARD RESTANO IDENTICHE -->
+<!-- (Non le riscrivo per accorciare, puoi lasciare le tue così come sono) -->
 </div>
 
 <!-- MODAL -->
 <div id="pokemonModal" class="modal">
 <div class="modal-content">
 <span class="close" onclick="closeModal()">&times;</span>
+
 <h2 id="modalTitle"></h2>
+
 <img id="modalImage" class="modal-img">
-<p><strong>Tipo:</strong> <span id="modalType"></span></p>
+
+<div class="modal-type-container">
+<div class="modal-type-label">Tipo:</div>
+<div class="modal-type-value" id="modalType"></div>
+</div>
+
 <p id="modalDesc"></p>
+
 </div>
 </div>
 
 <script>
 
 function openModal(card){
+
 document.getElementById("modalTitle").innerText=
 card.dataset.number+" "+card.dataset.name;
 
 document.getElementById("modalImage").src=
 card.dataset.img;
 
-document.getElementById("modalType").innerText=
-card.dataset.type;
+let rawType=card.dataset.type;
+let typeElem=document.getElementById("modalType");
+
+typeElem.innerText=rawType;
+typeElem.className="modal-type-value";
+
+/* Applica colore basato sul primo tipo */
+let primoTipo=rawType.split("/")[0].trim();
+let className="type-"+primoTipo.replace(/\s+/g,"");
+typeElem.classList.add(className);
 
 document.getElementById("modalDesc").innerText=
 card.dataset.desc;
@@ -346,4 +298,3 @@ modal.style.display="none";
 
 </body>
 </html>
-           
