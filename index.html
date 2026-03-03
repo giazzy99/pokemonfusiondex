@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FusionDex 2.4</title>
+<title>FusionDex 2.5</title>
 
 <link rel="icon" href="Pika.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@ background:white;
 /* GRID CARDS */
 .card-container{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); /* mantiene verticalità e affiancamento */
 gap:25px;
 padding:40px;
 justify-items:center;
@@ -200,10 +200,7 @@ font-size:16px;
     padding:20px;
     justify-items:center;
   }
-  .card{
-    width:90%;
-    min-height:auto;
-  }
+  /* la larghezza e altezza delle card restano fisse per mantenere verticalità */
   .modal-content{
     width:90%;
     height:auto;
@@ -227,7 +224,7 @@ font-size:16px;
 <body>
 
 <header class="pokedex-header">
-<h1>FusionDex 2.4</h1>
+<h1>FusionDex 2.5</h1>
 </header>
 
 <div class="controls-wrapper">
