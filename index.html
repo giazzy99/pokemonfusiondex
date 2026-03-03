@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FusionDex</title>
+<title>FusionDex 2.0</title>
 
 <link rel="icon" href="Pika.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@ body{
 margin:0;
 background:#0b2a4a;
 font-family:'Press Start 2P',cursive;
+transition:0.3s;
 }
 
 /* HEADER */
@@ -31,15 +32,18 @@ font-size:18px;
 text-shadow:3px 3px 0 #660000;
 }
 
-/* SEARCH */
-.search-container{
+/* CONTROLS */
+.controls{
 background:white;
 padding:15px;
 display:flex;
+flex-wrap:wrap;
 justify-content:center;
+gap:15px;
 }
-.search-container input{
-width:300px;
+
+.controls input,
+.controls select{
 padding:10px;
 font-family:'Press Start 2P';
 font-size:10px;
@@ -57,7 +61,6 @@ justify-items:center;
 
 /* CARD */
 .card{
-background:white;
 border-radius:10px;
 border:4px solid #FFD700;
 width:220px;
@@ -70,13 +73,15 @@ padding:15px 10px;
 position:relative;
 cursor:pointer;
 overflow:hidden;
-transition:0.2s;
+transition:0.3s;
+color:black;
 }
+
 .card:hover{
 transform:scale(1.05);
 }
 
-/* Pokeball 66% */
+/* Pokeball */
 .card::before{
 content:"";
 position:absolute;
@@ -107,42 +112,57 @@ position:relative;
 z-index:1;
 margin:6px 0;
 text-align:center;
+font-size:11px;
 }
 
-.card h2{
-font-size:11px;
-white-space:nowrap;
+/* TYPE BADGE */
+.type-badge{
+padding:4px 8px;
+border-radius:6px;
+font-size:9px;
+color:white;
+display:inline-block;
+margin:2px;
 }
 
 /* MODAL */
 .modal{
-display:none;
 position:fixed;
-z-index:100;
-left:0;
-top:0;
-width:100%;
-height:100%;
+inset:0;
 background:rgba(0,0,0,0.6);
+backdrop-filter:blur(5px);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+visibility:hidden;
+transition:0.3s;
+z-index:100;
+}
+
+.modal.active{
+opacity:1;
+visibility:visible;
 }
 
 .modal-content{
-background-image:url('Sfogri.jfif');
-background-size:cover;
-background-position:center;
-margin:5% auto;
 padding:20px;
 max-width:350px;
 border-radius:10px;
 border:4px solid #FFD700;
 text-align:center;
-position:relative;
+transform:scale(0.8);
+transition:0.3s;
+color:black;
+}
+
+.modal.active .modal-content{
+transform:scale(1);
 }
 
 .modal-img{
 width:200px;
-margin:0 auto;
-display:block;
+margin:10px auto;
 animation:float 3s ease-in-out infinite;
 }
 
@@ -152,60 +172,21 @@ animation:float 3s ease-in-out infinite;
 100%{transform:translateY(0);}
 }
 
-.modal-img:hover{
-animation:float 3s ease-in-out infinite,shake 0.4s infinite;
-}
-
-@keyframes shake{
-0%{transform:translateX(0);}
-50%{transform:translateX(6px);}
-100%{transform:translateX(-6px);}
-}
-
 .close{
 position:absolute;
-right:15px;
+right:20px;
 top:10px;
 cursor:pointer;
 font-size:16px;
 }
 
-/* TIPO */
-.modal-type-container{
-margin-top:15px;
-text-align:center;
-}
+/* TYPE COLORS */
+constStyle{}
 
-.modal-type-label{
-font-size:11px;
-margin-bottom:6px;
+/* GLOW */
+.glow{
+box-shadow:0 0 20px rgba(0,0,0,0.4);
 }
-
-.modal-type-value{
-font-size:12px;
-white-space:nowrap;
-font-weight:bold;
-}
-
-/* COLORI UFFICIALI */
-.type-Normale{color:#A8A878;}
-.type-Fuoco{color:#F08030;}
-.type-Acqua{color:#6890F0;}
-.type-Erba{color:#78C850;}
-.type-Elettro{color:#F8D030;}
-.type-Ghiaccio{color:#98D8D8;}
-.type-Lotta{color:#C03028;}
-.type-Veleno{color:#A040A0;}
-.type-Terra{color:#E0C068;}
-.type-Volante{color:#A890F0;}
-.type-Psico{color:#F85888;}
-.type-Coleottero{color:#A8B820;}
-.type-Roccia{color:#B8A038;}
-.type-Spettro{color:#705898;}
-.type-Drago{color:#7038F8;}
-.type-Buio{color:#705848;}
-.type-Acciaio{color:#B8B8D0;}
-.type-Folletto{color:#EE99AC;}
 
 </style>
 </head>
@@ -213,165 +194,150 @@ font-weight:bold;
 <body>
 
 <header class="pokedex-header">
-<h1>FusionDex</h1>
+<h1>FusionDex 2.0</h1>
 </header>
 
-<div class="search-container">
-<input type="text" id="searchInput" placeholder="CERCA POKEMON..." onkeyup="searchPokemon()">
+<div class="controls">
+<input type="text" id="searchInput" placeholder="CERCA..." onkeyup="updateDisplay()">
+<select id="sortSelect" onchange="updateDisplay()">
+<option value="default">Ordine Pubblicazione</option>
+<option value="az">Alfabetico A-Z</option>
+<option value="type">Per Tipo</option>
+</select>
 </div>
 
-<div class="card-container">
+<div class="card-container" id="cardContainer"></div>
 
-<!-- CARD 1 -->
-<div class="card" onclick="openModal(this)"
-data-number="#001" data-name="Alakazario"
-data-img="Alakazario.png"
-data-type="Buio / Lotta"
-data-desc="...">
-<h3>#001</h3>
-<img src="Alakazario.png">
-<h2>Alakazario</h2>
-</div>
-
-<!-- CARD 2 -->
-<div class="card" onclick="openModal(this)"
-data-number="#002" data-name="Chapras"
-data-img="Chapras.png"
-data-type="Fuoco / Drago"
-data-desc="...">
-<h3>#002</h3>
-<img src="Chapras.png">
-<h2>Chapras</h2>
-</div>
-
-<!-- CARD 3 -->
-<div class="card" onclick="openModal(this)"
-data-number="#003" data-name="Dorygon Z"
-data-img="Dorygon Z.png"
-data-type="Psico / Ghiaccio"
-data-desc="...">
-<h3>#003</h3>
-<img src="Dorygon Z.png">
-<h2>Dorygon Z</h2>
-</div>
-
-<!-- CARD 4 -->
-<div class="card" onclick="openModal(this)"
-data-number="#004" data-name="Megarig"
-data-img="Megarig.png"
-data-type="Erba"
-data-desc="...">
-<h3>#004</h3>
-<img src="Megarig.png">
-<h2>Megarig</h2>
-</div>
-
-<!-- CARD 5 -->
-<div class="card" onclick="openModal(this)"
-data-number="#005" data-name="Troparia"
-data-img="Troparia.png"
-data-type="Erba / Roccia"
-data-desc="...">
-<h3>#005</h3>
-<img src="Troparia.png">
-<h2>Troparia</h2>
-</div>
-
-<!-- CARD 6 -->
-<div class="card" onclick="openModal(this)"
-data-number="#006" data-name="Girandoom"
-data-img="Girandoom.png"
-data-type="Elettro"
-data-desc="...">
-<h3>#006</h3>
-<img src="Girandoom.png">
-<h2>Girandoom</h2>
-</div>
-
-<!-- CARD 7 -->
-<div class="card" onclick="openModal(this)"
-data-number="#007" data-name="Glizor"
-data-img="Glizor.png"
-data-type="Volante / Veleno"
-data-desc="...">
-<h3>#007</h3>
-<img src="Glizor.png">
-<h2>Glizor</h2>
-</div>
-
-<!-- CARD 8 -->
-<div class="card" onclick="openModal(this)"
-data-number="#008" data-name="Lightyena"
-data-img="Lightyena.png"
-data-type="Buio"
-data-desc="...">
-<h3>#008</h3>
-<img src="Lightyena.png">
-<h2>Lightyena</h2>
-</div>
-
-</div>
-
-<!-- MODAL -->
-<div id="pokemonModal" class="modal">
-<div class="modal-content">
-<span class="close" onclick="closeModal()">&times;</span>
+<div id="pokemonModal" class="modal" onclick="closeModal(event)">
+<div class="modal-content glow" id="modalContent">
+<span class="close" onclick="forceClose()">&times;</span>
 <h2 id="modalTitle"></h2>
 <img id="modalImage" class="modal-img">
-
-<div class="modal-type-container">
-<div class="modal-type-label">Tipo:</div>
-<div class="modal-type-value" id="modalType"></div>
-</div>
-
+<div id="modalTypes"></div>
 <p id="modalDesc"></p>
 </div>
 </div>
 
 <script>
 
-function openModal(card){
-document.getElementById("modalTitle").innerText=
-card.dataset.number+" "+card.dataset.name;
+/* ================= DATA ================= */
 
-document.getElementById("modalImage").src=
-card.dataset.img;
+const pokemonData = [
+{number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",desc:"..."},
+{number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",desc:"..."},
+{number:"#003",name:"Dorygon Z",type:"Psico / Ghiaccio",img:"Dorygon Z.png",desc:"..."},
+{number:"#004",name:"Megarig",type:"Erba",img:"Megarig.png",desc:"..."},
+{number:"#005",name:"Troparia",type:"Erba / Roccia",img:"Troparia.png",desc:"..."},
+{number:"#006",name:"Girandoom",type:"Elettro",img:"Girandoom.png",desc:"..."},
+{number:"#007",name:"Glizor",type:"Volante / Veleno",img:"Glizor.png",desc:"..."},
+{number:"#008",name:"Lightyena",type:"Buio",img:"Lightyena.png",desc:"..."}
+];
 
-let rawType=card.dataset.type;
-let typeElem=document.getElementById("modalType");
-
-typeElem.innerText=rawType;
-typeElem.className="modal-type-value";
-
-let primoTipo=rawType.split("/")[0].trim();
-let className="type-"+primoTipo.replace(/\s+/g,"");
-typeElem.classList.add(className);
-
-document.getElementById("modalDesc").innerText=
-card.dataset.desc;
-
-document.getElementById("pokemonModal").style.display="block";
-}
-
-function closeModal(){
-document.getElementById("pokemonModal").style.display="none";
-}
-
-function searchPokemon(){
-let input=document.getElementById("searchInput").value.toLowerCase();
-let cards=document.getElementsByClassName("card");
-for(let i=0;i<cards.length;i++){
-let name=cards[i].dataset.name.toLowerCase();
-cards[i].style.display=name.includes(input)?"flex":"none";
-}
-}
-
-window.onclick=function(event){
-let modal=document.getElementById("pokemonModal");
-if(event.target==modal){
-modal.style.display="none";
-}
+const typeColors = {
+Normale:"#A8A878", Fuoco:"#F08030", Acqua:"#6890F0", Erba:"#78C850",
+Elettro:"#F8D030", Ghiaccio:"#98D8D8", Lotta:"#C03028", Veleno:"#A040A0",
+Terra:"#E0C068", Volante:"#A890F0", Psico:"#F85888", Coleottero:"#A8B820",
+Roccia:"#B8A038", Spettro:"#705898", Drago:"#7038F8", Buio:"#705848",
+Acciaio:"#B8B8D0", Folletto:"#EE99AC"
 };
+
+/* ================= GENERAZIONE CARD ================= */
+
+function createCards(data){
+const container=document.getElementById("cardContainer");
+container.innerHTML="";
+
+data.forEach(pokemon=>{
+let card=document.createElement("div");
+card.className="card glow";
+
+let firstType=pokemon.type.split("/")[0].trim();
+let color1=typeColors[firstType];
+card.style.background=`linear-gradient(135deg, ${color1}, white)`;
+
+card.innerHTML=`
+<h3>${pokemon.number}</h3>
+<img src="${pokemon.img}">
+<h2>${pokemon.name}</h2>
+`;
+
+card.onclick=()=>openModal(pokemon);
+container.appendChild(card);
+});
+}
+
+/* ================= MODAL ================= */
+
+function openModal(pokemon){
+const modal=document.getElementById("pokemonModal");
+const content=document.getElementById("modalContent");
+
+let firstType=pokemon.type.split("/")[0].trim();
+let color1=typeColors[firstType];
+content.style.background=`linear-gradient(135deg, ${color1}, white)`;
+
+document.getElementById("modalTitle").innerText=
+pokemon.number+" "+pokemon.name;
+
+document.getElementById("modalImage").src=pokemon.img;
+document.getElementById("modalDesc").innerText=pokemon.desc;
+
+let typesDiv=document.getElementById("modalTypes");
+typesDiv.innerHTML="";
+
+pokemon.type.split("/").forEach((t,index)=>{
+let type=t.trim();
+let span=document.createElement("span");
+span.className="type-badge";
+span.style.background=typeColors[type];
+span.innerText=type;
+typesDiv.appendChild(span);
+
+if(index===0 && pokemon.type.includes("/")){
+let slash=document.createElement("span");
+slash.innerText=" / ";
+slash.style.color="black";
+typesDiv.appendChild(slash);
+}
+});
+
+modal.classList.add("active");
+}
+
+function closeModal(e){
+if(e.target.id==="pokemonModal"){
+forceClose();
+}
+}
+
+function forceClose(){
+document.getElementById("pokemonModal").classList.remove("active");
+}
+
+/* ================= RICERCA + FILTRI ================= */
+
+function updateDisplay(){
+let search=document.getElementById("searchInput").value.toLowerCase();
+let sort=document.getElementById("sortSelect").value;
+
+let filtered=pokemonData.filter(p=>
+p.name.toLowerCase().includes(search) ||
+p.number.toLowerCase().includes(search) ||
+p.type.toLowerCase().includes(search) ||
+p.desc.toLowerCase().includes(search)
+);
+
+if(sort==="az"){
+filtered.sort((a,b)=>a.name.localeCompare(b.name));
+}
+if(sort==="type"){
+filtered.sort((a,b)=>a.type.localeCompare(b.type));
+}
+
+createCards(filtered);
+}
+
+createCards(pokemonData);
 
 </script>
 
