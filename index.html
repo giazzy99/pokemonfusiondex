@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FusionDex 2.1</title>
+<title>FusionDex 2.2</title>
 
 <link rel="icon" href="Pika.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -32,41 +32,17 @@ text-shadow:3px 3px 0 #660000;
 }
 
 /* ===== CONTROLS AREA ===== */
-
 .controls-wrapper{
-position:relative;
 background:white;
-padding:30px 0;
+padding:25px 0;
 display:flex;
 justify-content:center;
 align-items:center;
-overflow:hidden;
 }
 
-/* TYPE DECORATIONS */
-.type-decoration{
-position:absolute;
-display:flex;
-flex-direction:column;
-gap:12px;
-font-size:11px;
-opacity:0.15;
-font-weight:bold;
-}
-
-.left-types{ left:20px; }
-.right-types{ right:20px; }
-
-.type-decoration span{
-display:block;
-}
-
-/* CONTROLS */
 .controls{
-position:relative;
 display:flex;
 gap:15px;
-z-index:2;
 }
 
 .controls input,
@@ -179,10 +155,10 @@ visibility:visible;
 }
 
 .modal-content{
-width:350px;
-height:500px;
+width:380px;
+height:420px;   /* quasi quadrato */
 padding:20px;
-border-radius:10px;
+border-radius:14px;   /* leggermente più arrotondato */
 border:4px solid #FFD700;
 text-align:center;
 transform:scale(0.8);
@@ -223,44 +199,18 @@ font-size:16px;
 <body>
 
 <header class="pokedex-header">
-<h1>FusionDex 2.1</h1>
+<h1>FusionDex 2.2</h1>
 </header>
 
 <div class="controls-wrapper">
-
-<div class="type-decoration left-types">
-<span>Acciaio</span>
-<span>Acqua</span>
-<span>Buio</span>
-<span>Coleottero</span>
-<span>Drago</span>
-<span>Elettro</span>
-<span>Erba</span>
-<span>Folletto</span>
-<span>Fuoco</span>
-</div>
-
-<div class="controls">
-<input type="text" id="searchInput" placeholder="CERCA..." onkeyup="updateDisplay()">
-<select id="sortSelect" onchange="updateDisplay()">
-<option value="default">Filtra</option>
-<option value="az">Alfabetico A-Z</option>
-<option value="type">Per Tipo</option>
-</select>
-</div>
-
-<div class="type-decoration right-types">
-<span>Ghiaccio</span>
-<span>Lotta</span>
-<span>Normale</span>
-<span>Psico</span>
-<span>Roccia</span>
-<span>Spettro</span>
-<span>Terra</span>
-<span>Veleno</span>
-<span>Volante</span>
-</div>
-
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="CERCA..." onkeyup="updateDisplay()">
+    <select id="sortSelect" onchange="updateDisplay()">
+      <option value="default">Filtra</option>
+      <option value="az">Alfabetico A-Z</option>
+      <option value="type">Per Tipo</option>
+    </select>
+  </div>
 </div>
 
 <div class="card-container" id="cardContainer"></div>
@@ -279,6 +229,7 @@ font-size:16px;
 
 <script>
 
+/* ================= DATA ================= */
 const pokemonData = [
 {number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",desc:"..."},
 {number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",desc:"..."},
@@ -298,6 +249,7 @@ Roccia:"#B8A038", Spettro:"#705898", Drago:"#7038F8", Buio:"#705848",
 Acciaio:"#B8B8D0", Folletto:"#EE99AC"
 };
 
+/* ================= GENERAZIONE CARD ================= */
 function createCards(data){
 const container=document.getElementById("cardContainer");
 container.innerHTML="";
@@ -317,22 +269,25 @@ container.appendChild(card);
 });
 }
 
+/* ================= MODAL ================= */
 function openModal(pokemon){
 const modal=document.getElementById("pokemonModal");
 const content=document.getElementById("modalContent");
 
+/* sfondo dinamico */
 let firstType=pokemon.type.split("/")[0].trim();
 let color1=typeColors[firstType];
 content.style.background=`linear-gradient(135deg, ${color1}, white)`;
 
+/* titolo e immagine */
 document.getElementById("modalTitle").innerText=
 pokemon.number+" "+pokemon.name;
 document.getElementById("modalImage").src=pokemon.img;
 document.getElementById("modalDesc").innerText=pokemon.desc;
 
+/* tipi */
 let typesDiv=document.getElementById("modalTypes");
 typesDiv.innerHTML="";
-
 pokemon.type.split("/").forEach((t,index)=>{
 let type=t.trim();
 let span=document.createElement("span");
@@ -349,8 +304,12 @@ typesDiv.appendChild(slash);
 }
 });
 
-document.getElementById("openSound").currentTime=0;
-document.getElementById("openSound").play();
+/* suono 2x */
+let sound=document.getElementById("openSound");
+sound.pause();
+sound.currentTime=0;
+sound.playbackRate=2.0;
+sound.play();
 
 modal.classList.add("active");
 }
@@ -363,8 +322,13 @@ forceClose();
 
 function forceClose(){
 document.getElementById("pokemonModal").classList.remove("active");
+
+let sound=document.getElementById("openSound");
+sound.pause();
+sound.currentTime=0;
 }
 
+/* ================= RICERCA + FILTRI ================= */
 function updateDisplay(){
 let search=document.getElementById("searchInput").value.toLowerCase();
 let sort=document.getElementById("sortSelect").value;
@@ -386,6 +350,7 @@ filtered.sort((a,b)=>a.type.localeCompare(b.type));
 createCards(filtered);
 }
 
+/* ================= INIT ================= */
 createCards(pokemonData);
 
 </script>
