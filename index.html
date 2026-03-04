@@ -332,6 +332,7 @@ body{
   width:80px;
   height:80px;
   object-fit:contain;
+  cursor:pointer;
 }
 
 .fusion-grid img::after{
@@ -431,7 +432,7 @@ body{
 </div>
 </div>
 
-<!-- POPUP FUSION SPRITES -->
+<!-- POPUP FUSIONI SPRITES -->
 <div id="fusionModal" onclick="closeFusionModal(event)">
 <div class="fusion-content fusion-grid" id="fusionGrid"></div>
 </div>
@@ -557,4 +558,71 @@ function openModal(p){
         span.style.background=typeColors[type.trim()];
         span.innerText=type.trim();
         typesDiv.appendChild(span);
-   
+    });
+
+    let sound=document.getElementById("openSound");
+    sound.pause();
+    sound.currentTime=0;
+    sound.playbackRate=2.0;
+    sound.play();
+
+    modal.classList.add("active");
+}
+
+function closeModal(e){
+    if(e.target.id==="pokemonModal"){forceClose();}
+}
+
+function forceClose(){
+    document.getElementById("pokemonModal").classList.remove("active");
+    let sound=document.getElementById("openSound");
+    sound.pause();
+    sound.currentTime=0;
+}
+
+/* ================= SEARCH & FILTER ================= */
+function updateDisplay(){
+    let input=document.getElementById("searchInput").value.toLowerCase();
+    let sort=document.getElementById("sortSelect").value;
+
+    let filtered=pokemonData.filter(p=>
+        p.name.toLowerCase().includes(input)||
+        p.number.includes(input)||
+        p.type.toLowerCase().includes(input)
+    );
+
+    if(sort==="az") filtered.sort((a,b)=>a.name.localeCompare(b.name));
+    if(sort==="type") filtered.sort((a,b)=>a.type.localeCompare(b.type));
+    if(sort==="number") filtered.sort((a,b)=>parseInt(a.number.slice(1))-parseInt(b.number.slice(1)));
+
+    createCards(filtered);
+}
+
+/* ================= FUSIONI SPRITES ================= */
+function openFusionModal(){
+    const modal=document.getElementById("fusionModal");
+    const grid=document.getElementById("fusionGrid");
+    grid.innerHTML="";
+
+    pokemonData.forEach(p=>{
+        let img=document.createElement("img");
+        img.src=p.sprite;
+        img.dataset.name=p.name;
+        grid.appendChild(img);
+    });
+
+    modal.classList.add("active");
+}
+
+function closeFusionModal(e){
+    if(e.target.id==="fusionModal"){
+        document.getElementById("fusionModal").classList.remove("active");
+    }
+}
+
+/* ================= INIT ================= */
+createCards(pokemonData);
+</script>
+
+</body>
+</html>
