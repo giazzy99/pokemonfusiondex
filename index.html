@@ -298,8 +298,9 @@ body{
 }
 
 .fusion-content{
-  width:70%;
-  max-height:80%;
+  width:70%;         /* larghezza 70% finestra */
+  max-height:80%;    /* altezza massima 80% finestra */
+  min-height:80%;    /* altezza minima fissa così il popup è sempre grande */
   background: repeating-linear-gradient(
     to bottom,
     #0b2a4a,
@@ -315,7 +316,6 @@ body{
   grid-template-columns:repeat(auto-fill,80px);
   justify-content:start;
   gap:15px;
-  scrollbar-width:thin;
 }
 
 .fusion-content::-webkit-scrollbar{
