@@ -286,18 +286,20 @@ font-size:16px;
   );
   border:4px solid #FFD700;
   border-radius:18px;
-  overflow-y:auto;
+  overflow-x:auto;
+  overflow-y:hidden;
   padding:20px;
   position:relative;
   display:flex;
-  flex-direction:column;
+  align-items:center;
 }
 
 .fusion-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  display:flex;
+  flex-direction:row;
   gap:15px;
-  justify-items:center;
+  align-items:center;
+  white-space:nowrap;
 }
 
 .fusion-grid img{
@@ -306,6 +308,23 @@ font-size:16px;
   object-fit:cover;
   border-radius:8px;
   border:2px solid #fff;
+  position:relative;
+  cursor:pointer;
+}
+
+.fusion-grid img:hover::after{
+  content: attr(title);
+  position:absolute;
+  bottom:100%;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  color:black;
+  padding:4px 6px;
+  font-family:'Press Start 2P';
+  font-size:8px;
+  border-radius:4px;
+  white-space:nowrap;
 }
 
 /* MOBILE */
@@ -338,6 +357,7 @@ width:100%;
 #fusionModal .modal-content{
   width:95%;
   height:80%;
+  overflow-x:auto;
 }
 }
 </style>
@@ -391,7 +411,6 @@ width:100%;
 <div id="fusionModal" class="modal" onclick="closeFusionModal(event)">
   <div class="modal-content" id="fusionContent">
     <span class="close" onclick="forceCloseFusion()">&times;</span>
-    <h2>Fusion Sprites</h2>
     <div class="fusion-grid" id="fusionGrid"></div>
   </div>
 </div>
@@ -434,26 +453,26 @@ stopPikachuSound();
 
 /* ================= POKEMON DATA ================= */
 const pokemonData=[
-{number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",spriteBase:"Alakazario_base.png",desc:"..."},
-{number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",spriteBase:"Chapras_base.png",desc:"..."},
-{number:"#003",name:"Dorygon Z",type:"Psico / Ghiaccio",img:"Dorygon Z.png",spriteBase:"DorygonZ_base.png",desc:"..."},
-{number:"#004",name:"Megarig",type:"Erba",img:"Megarig.png",spriteBase:"Megarig_base.png",desc:"..."},
-{number:"#005",name:"Troparia",type:"Erba / Roccia",img:"Troparia.png",spriteBase:"Troparia_base.png",desc:"..."},
-{number:"#006",name:"Girandoom",type:"Elettro",img:"Girandoom.png",spriteBase:"Girandoom_base.png",desc:"..."},
-{number:"#007",name:"Glizor",type:"Volante / Veleno",img:"Glizor.png",spriteBase:"Glizor_base.png",desc:"..."},
-{number:"#008",name:"Lightyena",type:"Buio",img:"Lightyena.png",spriteBase:"Lightyena_base.png",desc:"..."},
-{number:"#009",name:"Sharkord",type:"Acqua / Buio",img:"Sharkord.png",spriteBase:"Sharkord_base.png",desc:"..."},
-{number:"#010",name:"Magma",type:"Fuoco",img:"Magma.png",spriteBase:"Magma_base.png",desc:"..."},
-{number:"#011",name:"Arbas",type:"Veleno",img:"Arbas.png",spriteBase:"Arbas_base.png",desc:"..."},
-{number:"#012",name:"Tyrosion",type:"Drago / Fuoco",img:"Tyrosion.png",spriteBase:"Tyrosion_base.png",desc:"..."},
-{number:"#013",name:"Shedos",type:"Coleottero / Elettro",img:"Shedos.png",spriteBase:"Shedos_base.png",desc:"..."},
-{number:"#014",name:"Mandoum",type:"Elettro",img:"Mandoum.png",spriteBase:"Mandoum_base.png",desc:"..."},
-{number:"#015",name:"Gigadong",type:"Psico / Acciaio",img:"Gigadong.png",spriteBase:"Gigadong_base.png",desc:"..."},
-{number:"#016",name:"Herazorn",type:"Coleottero / Roccia",img:"Herazorn.png",spriteBase:"Herazorn_base.png",desc:"..."},
-{number:"#017",name:"Dodactyl",type:"Normale",img:"Dodactyl.png",spriteBase:"Dodactyl_base.png",desc:"..."},
-{number:"#018",name:"Gabitzel",type:"Acqua",img:"Gabitzel.png",spriteBase:"Gabitzel_base.png",desc:"..."},
-{number:"#019",name:"Sabler",type:"Ghiaccio / Volante",img:"Sabler.png",spriteBase:"Sabler_base.png",desc:"..."},
-{number:"#020",name:"Pibat",type:"Elettro / Folletto",img:"Pibat.png",spriteBase:"Pibat_base.png",desc:"..."}
+{number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",desc:"..."},
+{number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",desc:"..."},
+{number:"#003",name:"Dorygon Z",type:"Psico / Ghiaccio",img:"Dorygon Z.png",desc:"..."},
+{number:"#004",name:"Megarig",type:"Erba",img:"Megarig.png",desc:"..."},
+{number:"#005",name:"Troparia",type:"Erba / Roccia",img:"Troparia.png",desc:"..."},
+{number:"#006",name:"Girandoom",type:"Elettro",img:"Girandoom.png",desc:"..."},
+{number:"#007",name:"Glizor",type:"Volante / Veleno",img:"Glizor.png",desc:"..."},
+{number:"#008",name:"Lightyena",type:"Buio",img:"Lightyena.png",desc:"..."},
+{number:"#009",name:"Sharkord",type:"Acqua / Buio",img:"Sharkord.png",desc:"..."},
+{number:"#010",name:"Magma",type:"Fuoco",img:"Magma.png",desc:"..."},
+{number:"#011",name:"Arbas",type:"Veleno",img:"Arbas.png",desc:"..."},
+{number:"#012",name:"Tyrosion",type:"Drago / Fuoco",img:"Tyrosion.png",desc:"..."},
+{number:"#013",name:"Shedos",type:"Coleottero / Elettro",img:"Shedos.png",desc:"..."},
+{number:"#014",name:"Mandoum",type:"Elettro",img:"Mandoum.png",desc:"..."},
+{number:"#015",name:"Gigadong",type:"Psico / Acciaio",img:"Gigadong.png",desc:"..."},
+{number:"#016",name:"Herazorn",type:"Coleottero / Roccia",img:"Herazorn.png",desc:"..."},
+{number:"#017",name:"Dodactyl",type:"Normale",img:"Dodactyl.png",desc:"..."},
+{number:"#018",name:"Gabitzel",type:"Acqua",img:"Gabitzel.png",desc:"..."},
+{number:"#019",name:"Sabler",type:"Ghiaccio / Volante",img:"Sabler.png",desc:"..."},
+{number:"#020",name:"Pibat",type:"Elettro / Folletto",img:"Pibat.png",desc:"..."}
 ];
 
 const typeColors={
@@ -541,26 +560,6 @@ sound.currentTime=0;
 /* ================= FUSION SPRITES MODAL ================= */
 function openFusionModal(){
   const modal = document.getElementById("fusionModal");
-  const grid = document.getElementById("fusionGrid");
-  grid.innerHTML = "";
-
-  pokemonData.forEach(p=>{
-    let container = document.createElement("div");
-    
-    let finalImg = document.createElement("img");
-    finalImg.src = p.img; // versione finale
-    finalImg.title = p.name + " finale";
-
-    let baseImg = document.createElement("img");
-    baseImg.src = p.spriteBase || p.img; // versione originale
-    baseImg.title = p.name + " originale";
-
-    container.appendChild(finalImg);
-    container.appendChild(baseImg);
-
-    grid.appendChild(container);
-  });
-
   modal.classList.add("active");
 }
 
@@ -592,7 +591,7 @@ createCards(filtered);
 
 /* ================= INIT ================= */
 createCards(pokemonData);
-</script>
 
+</script>
 </body>
 </html>
