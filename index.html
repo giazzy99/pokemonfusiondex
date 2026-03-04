@@ -277,14 +277,14 @@ body{
   font-size:16px;
 }
 
-/* POPUP FUSIONI SPRITES */
+/* POPUP FUSIONI SPRITES - VERTICALE */
 #fusionModal{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.6);
   display:flex;
   justify-content:center;
-  align-items:flex-start;
+  align-items:center;
   padding-top:30px;
   opacity:0;
   visibility:hidden;
@@ -309,17 +309,17 @@ body{
   border:4px solid #ffffff;
   border-radius:12px;
   padding:20px;
-  overflow-x:auto;
-  overflow-y:hidden;
+  overflow-y:auto;
+  overflow-x:hidden;
   display:flex;
-  flex-direction:row;
+  flex-direction:column;
   align-items:center;
-  gap:10px;
+  gap:15px;
   scrollbar-width:thin;
 }
 
 .fusion-content::-webkit-scrollbar{
-  height:8px;
+  width:8px;
 }
 
 .fusion-content::-webkit-scrollbar-thumb{
@@ -328,11 +328,11 @@ body{
 }
 
 .fusion-grid img{
-  position:relative;
   width:80px;
   height:80px;
   object-fit:contain;
   cursor:pointer;
+  background:none; /* Rimuove sfondo */
 }
 
 .fusion-grid img::after{
@@ -598,7 +598,7 @@ function updateDisplay(){
     createCards(filtered);
 }
 
-/* ================= FUSIONI SPRITES ================= */
+/* ================= FUSIONI SPRITES - VERTICALE ================= */
 function openFusionModal(){
     const modal=document.getElementById("fusionModal");
     const grid=document.getElementById("fusionGrid");
@@ -622,6 +622,7 @@ function closeFusionModal(e){
 
 /* ================= INIT ================= */
 createCards(pokemonData);
+
 </script>
 
 </body>
