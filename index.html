@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FusionDex 3.2</title>
+<title>FusionDex 3.3</title>
 
 <link rel="icon" href="Pikas.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@ font-family:'Press Start 2P',cursive;
 overflow-x:hidden;
 }
 
-/* ================= HEADER ROSSO ================= */
+/* ================= HEADER ================= */
 
 .pokedex-header{
 background:linear-gradient(135deg,#aa0000,#ff0000);
@@ -34,11 +34,11 @@ font-size:18px;
 text-shadow:3px 3px 0 #660000;
 }
 
-/* ================= PULSANTE PIKACHU (DESTRA) ================= */
+/* ================= PIKACHU BUTTON ================= */
 
 .pika-button-wrapper{
 position:absolute;
-right:15px; /* spostato a destra */
+right:15px;
 top:50%;
 transform:translateY(-50%);
 }
@@ -72,13 +72,13 @@ display:block;
 .pika-menu{
 position:absolute;
 top:85px;
-right:0; /* allineato a destra */
+right:0;
 background:white;
 border:3px solid #cc0000;
 border-radius:8px;
 display:none;
 flex-direction:column;
-min-width:160px;
+min-width:190px; /* aumentata */
 z-index:200;
 overflow:hidden;
 }
@@ -90,6 +90,8 @@ background:white;
 cursor:pointer;
 font-family:'Press Start 2P';
 font-size:10px;
+white-space:nowrap; /* niente ritorno a capo */
+text-align:center;
 }
 
 .pika-menu button:first-child{
@@ -190,7 +192,7 @@ text-align:center;
 font-size:11px;
 }
 
-/* ===== TYPE BADGE ===== */
+/* TYPE BADGE */
 
 .type-badge{
 padding:4px 8px;
@@ -292,8 +294,7 @@ width:100%;
 <body>
 
 <header class="pokedex-header">
-
-<h1>FusionDex 3.2</h1>
+<h1>FusionDex 3.3</h1>
 
 <div class="pika-button-wrapper">
   <button class="pika-button" onclick="togglePikaMenu()">
@@ -305,7 +306,6 @@ width:100%;
     <button onclick="window.location.href='sprites.html'">Fusion Sprites</button>
   </div>
 </div>
-
 </header>
 
 <div class="controls-wrapper">
@@ -356,7 +356,7 @@ document.getElementById("pikaMenu").style.display="none";
 }
 });
 
-/* DATABASE */
+/* DATABASE + FUNZIONI (invariati) */
 
 const pokemonData = [
 {number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",desc:"..."},
