@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FusionDex 3.1</title>
+<title>FusionDex 3.2</title>
 
 <link rel="icon" href="Pikas.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -34,11 +34,11 @@ font-size:18px;
 text-shadow:3px 3px 0 #660000;
 }
 
-/* ================= PULSANTE PIKACHU ================= */
+/* ================= PULSANTE PIKACHU (DESTRA) ================= */
 
 .pika-button-wrapper{
 position:absolute;
-left:15px;
+right:15px; /* spostato a destra */
 top:50%;
 transform:translateY(-50%);
 }
@@ -72,7 +72,7 @@ display:block;
 .pika-menu{
 position:absolute;
 top:85px;
-left:0;
+right:0; /* allineato a destra */
 background:white;
 border:3px solid #cc0000;
 border-radius:8px;
@@ -293,6 +293,8 @@ width:100%;
 
 <header class="pokedex-header">
 
+<h1>FusionDex 3.2</h1>
+
 <div class="pika-button-wrapper">
   <button class="pika-button" onclick="togglePikaMenu()">
     <img src="Pikas.png" alt="Pikachu">
@@ -304,7 +306,6 @@ width:100%;
   </div>
 </div>
 
-<h1>FusionDex 3.1</h1>
 </header>
 
 <div class="controls-wrapper">
@@ -356,6 +357,7 @@ document.getElementById("pikaMenu").style.display="none";
 });
 
 /* DATABASE */
+
 const pokemonData = [
 {number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",desc:"..."},
 {number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",desc:"..."},
