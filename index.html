@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FusionDex 2.7</title>
+<title>FusionDex 2.8</title>
 
 <link rel="icon" href="Pika.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -32,7 +32,7 @@ font-size:18px;
 text-shadow:3px 3px 0 #660000;
 }
 
-/* PULSANTE PIKAS */
+/* PULSANTE PIKACHU */
 .pika-button-wrapper{
 position:absolute;
 left:10px;
@@ -44,9 +44,11 @@ transform:translateY(-50%);
 width:60px;
 height:60px;
 background-image:url("Pikas.png");
-background-size:cover;
+background-size:contain;
+background-repeat:no-repeat;
 background-position:center;
 border:none;
+padding:0;
 cursor:pointer;
 }
 
@@ -274,7 +276,7 @@ width:100%;
     <button onclick="window.location.href='sprites.html'">Fusion Sprites</button>
   </div>
 </div>
-<h1>FusionDex 2.7</h1>
+<h1>FusionDex 2.8</h1>
 </header>
 
 <div class="controls-wrapper">
@@ -305,14 +307,13 @@ width:100%;
 
 <script>
 
-// FUNZIONI PULSANTE PIKACHU
+// PULSANTE PIKACHU
 function togglePikaMenu(){
 let menu=document.getElementById("pikaMenu");
 menu.style.display=(menu.style.display==="flex")?"none":"flex";
 menu.style.flexDirection="column";
 }
 
-// RIPRODUCI VERSO PIKACHU
 function playPikachuSound(){
 let s=document.getElementById("pikachuSound");
 s.pause();
