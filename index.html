@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FusionDex 3.0</title>
+<title>FusionDex 3.1</title>
 
 <link rel="icon" href="Pikas.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@ font-size:18px;
 text-shadow:3px 3px 0 #660000;
 }
 
-/* ===== PULSANTE PIKACHU SENZA SFONDO ===== */
+/* ================= PULSANTE PIKACHU ================= */
 
 .pika-button-wrapper{
 position:absolute;
@@ -44,43 +44,56 @@ transform:translateY(-50%);
 }
 
 .pika-button{
-background:none;
-border:none;
-padding:0;
+width:70px;
+height:70px;
+border-radius:50%;
+background:white;
+border:5px solid #FFD700;
 cursor:pointer;
 display:flex;
 align-items:center;
 justify-content:center;
+transition:0.3s;
+padding:0;
+}
+
+.pika-button:hover{
+transform:scale(1.05);
 }
 
 .pika-button img{
-width:60px;
+width:50px;
 height:auto;
 display:block;
 }
 
-/* ===== MENU ===== */
+/* ================= MENU ================= */
 
 .pika-menu{
 position:absolute;
-top:70px;
+top:85px;
 left:0;
 background:white;
 border:3px solid #cc0000;
 border-radius:8px;
 display:none;
 flex-direction:column;
-min-width:150px;
+min-width:160px;
 z-index:200;
+overflow:hidden;
 }
 
 .pika-menu button{
-padding:10px;
+padding:12px;
 border:none;
 background:white;
 cursor:pointer;
 font-family:'Press Start 2P';
 font-size:10px;
+}
+
+.pika-menu button:first-child{
+border-bottom:2px solid black;
 }
 
 .pika-menu button:hover{
@@ -291,7 +304,7 @@ width:100%;
   </div>
 </div>
 
-<h1>FusionDex 3.0</h1>
+<h1>FusionDex 3.1</h1>
 </header>
 
 <div class="controls-wrapper">
@@ -322,8 +335,7 @@ width:100%;
 
 <script>
 
-/* ================= MENU PIKACHU ================= */
-
+/* MENU */
 function togglePikaMenu(){
 let menu=document.getElementById("pikaMenu");
 menu.style.display=(menu.style.display==="flex")?"none":"flex";
@@ -343,8 +355,7 @@ document.getElementById("pikaMenu").style.display="none";
 }
 });
 
-/* ================= DATABASE ================= */
-
+/* DATABASE */
 const pokemonData = [
 {number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",desc:"..."},
 {number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",desc:"..."},
@@ -375,8 +386,6 @@ Terra:"#E0C068", Volante:"#A890F0", Psico:"#F85888", Coleottero:"#A8B820",
 Roccia:"#B8A038", Spettro:"#705898", Drago:"#7038F8", Buio:"#705848",
 Acciaio:"#B8B8D0", Folletto:"#EE99AC"
 };
-
-/* ================= FUNZIONI ================= */
 
 function shadeColor(color,percent){
 let R=parseInt(color.substring(1,3),16);
