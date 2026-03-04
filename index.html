@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FusionDex 2.6</title>
+<title>FusionDex 2.7</title>
 
 <link rel="icon" href="Pika.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
-
 body{
 margin:0;
 background:#0b2a4a;
@@ -17,7 +16,6 @@ font-family:'Press Start 2P',cursive;
 }
 
 /* HEADER */
-
 .pokedex-header{
 background:linear-gradient(135deg,#aa0000,#ff0000);
 height:90px;
@@ -25,6 +23,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 border-bottom:4px solid #660000;
+position:relative;
 }
 
 .pokedex-header h1{
@@ -33,20 +32,63 @@ font-size:18px;
 text-shadow:3px 3px 0 #660000;
 }
 
-/* ===== BANNER CON ERBA ===== */
+/* PULSANTE PIKACHU */
+.pika-button-wrapper{
+position:absolute;
+left:10px;
+top:50%;
+transform:translateY(-50%);
+}
 
+.pika-button{
+width:60px;
+height:60px;
+background-image:url("Pikachu.png");
+background-size:cover;
+background-position:center;
+border:none;
+cursor:pointer;
+}
+
+/* MINI MENU */
+.pika-menu{
+position:absolute;
+top:70px;
+left:0;
+background:white;
+border:3px solid #cc0000;
+border-radius:8px;
+display:none;
+flex-direction:column;
+min-width:140px;
+z-index:200;
+}
+
+.pika-menu button{
+padding:8px;
+border:none;
+background:#fff;
+cursor:pointer;
+font-family:'Press Start 2P';
+font-size:10px;
+text-align:center;
+}
+
+.pika-menu button:hover{
+background:#f0f0f0;
+}
+
+/* CONTROLS BANNER (ERBA) */
 .controls-wrapper{
 background-image:url("Erba.png");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
-height:90px; /* Altezza uguale al banner rosso */
+height:90px;
 display:flex;
 justify-content:center;
 align-items:center;
 }
-
-/* BOX CONTROLLI – trasparente eccetto input/select */
 
 .controls{
 display:flex;
@@ -62,8 +104,7 @@ border:3px solid #cc0000;
 background:white;
 }
 
-/* ===== GRID ===== */
-
+/* GRID CARDS */
 .card-container{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -72,8 +113,7 @@ padding:40px;
 justify-items:center;
 }
 
-/* ===== CARD ===== */
-
+/* CARD */
 .card{
 border-radius:12px;
 border:4px solid #FFD700;
@@ -129,7 +169,6 @@ font-size:11px;
 }
 
 /* TYPE BADGE */
-
 .type-badge{
 padding:4px 8px;
 border-radius:6px;
@@ -139,8 +178,7 @@ display:inline-block;
 margin:2px;
 }
 
-/* ===== MODAL ===== */
-
+/* MODAL */
 .modal{
 position:fixed;
 inset:0;
@@ -199,31 +237,25 @@ cursor:pointer;
 font-size:16px;
 }
 
-/* ===== MOBILE ===== */
-
+/* MOBILE */
 @media screen and (max-width: 500px){
-
 .card-container{
 gap:15px;
 padding:20px;
 }
-
 .card{
 width:90%;
 }
-
 .modal-content{
 width:90%;
 height:auto;
 max-height:90vh;
 overflow-y:auto;
 }
-
 .controls{
 flex-direction:column;
 align-items:center;
 }
-
 .controls input,
 .controls select{
 width:100%;
@@ -232,11 +264,17 @@ width:100%;
 
 </style>
 </head>
-
 <body>
 
 <header class="pokedex-header">
-<h1>FusionDex 2.6</h1>
+<div class="pika-button-wrapper">
+  <button class="pika-button" onclick="togglePikaMenu()"></button>
+  <div class="pika-menu" id="pikaMenu">
+    <button onclick="playPikachuSound()">Pika Pika!</button>
+    <button onclick="window.location.href='sprites.html'">Fusion Sprites</button>
+  </div>
+</div>
+<h1>FusionDex 2.7</h1>
 </header>
 
 <div class="controls-wrapper">
@@ -263,9 +301,35 @@ width:100%;
 </div>
 
 <audio id="openSound" src="Ball.mp3"></audio>
+<audio id="pikachuSound" src="Verso.mp3"></audio>
 
 <script>
 
+// FUNZIONI PULSANTE PIKACHU
+function togglePikaMenu(){
+let menu=document.getElementById("pikaMenu");
+menu.style.display=(menu.style.display==="flex")?"none":"flex";
+menu.style.flexDirection="column";
+}
+
+// RIPRODUCI VERSO PIKACHU
+function playPikachuSound(){
+let s=document.getElementById("pikachuSound");
+s.pause();
+s.currentTime=0;
+s.play();
+}
+
+// CHIUDI MENU SE CLICCHI FUORI
+window.onclick=function(e){
+if(!e.target.classList.contains('pika-button')){
+let menu=document.getElementById("pikaMenu");
+menu.style.display="none";
+if(e.target.id==="pokemonModal"){forceClose();}
+}
+};
+
+// POKEMON DATA
 const pokemonData = [
 {number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",desc:"..."},
 {number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",desc:"..."},
@@ -313,6 +377,7 @@ return "#" +
 ((B.toString(16).length==1?"0":"")+B.toString(16));
 }
 
+// CREAZIONE CARDS
 function createCards(data){
 const container=document.getElementById("cardContainer");
 container.innerHTML="";
@@ -329,6 +394,7 @@ container.appendChild(card);
 });
 }
 
+// MODAL
 function openModal(p){
 const modal=document.getElementById("pokemonModal");
 const content=document.getElementById("modalContent");
@@ -371,6 +437,7 @@ sound.pause();
 sound.currentTime=0;
 }
 
+// FILTRI E RICERCA
 function updateDisplay(){
 let search=document.getElementById("searchInput").value.toLowerCase();
 let sort=document.getElementById("sortSelect").value;
