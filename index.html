@@ -583,4 +583,16 @@ p.number.includes(input)||
 p.type.toLowerCase().includes(input)
 );
 
-if(sort==="az
+if(sort==="az") filtered.sort((a,b)=>a.name.localeCompare(b.name));
+if(sort==="type") filtered.sort((a,b)=>a.type.localeCompare(b.type));
+if(sort==="number") filtered.sort((a,b)=>parseInt(a.number.slice(1))-parseInt(b.number.slice(1)));
+
+createCards(filtered);
+}
+
+/* ================= INIT ================= */
+createCards(pokemonData);
+</script>
+
+</body>
+</html>
