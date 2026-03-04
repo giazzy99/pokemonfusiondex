@@ -54,7 +54,7 @@ border:3px solid #cc0000;
 background:white;
 }
 
-/* GRID CARDS */
+/* GRID */
 .card-container{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -271,7 +271,12 @@ const pokemonData = [
 {number:"#012",name:"Tyrosion",type:"Drago / Fuoco",img:"Tyrosion.png",desc:"..."},
 {number:"#013",name:"Shedos",type:"Coleottero / Elettro",img:"Shedos.png",desc:"..."},
 {number:"#014",name:"Mandoum",type:"Elettro",img:"Mandoum.png",desc:"..."},
-{number:"#015",name:"Gigadong",type:"Psico / Acciaio",img:"Gigadong.png",desc:"..."}
+{number:"#015",name:"Gigadong",type:"Psico / Acciaio",img:"Gigadong.png",desc:"..."},
+{number:"#016",name:"Herazorn",type:"Coleottero / Roccia",img:"Herazorn.png",desc:"..."},
+{number:"#017",name:"Dodactyl",type:"Normale",img:"Dodactyl.png",desc:"..."},
+{number:"#018",name:"Gabitzel",type:"Acqua",img:"Gabitzel.png",desc:"..."},
+{number:"#019",name:"Sabler",type:"Ghiaccio / Volante",img:"Sabler.png",desc:"..."},
+{number:"#020",name:"Pibat",type:"Elettro / Folletto",img:"Pibat.png",desc:"..."}
 ];
 
 const typeColors = {
@@ -281,6 +286,8 @@ Terra:"#E0C068", Volante:"#A890F0", Psico:"#F85888", Coleottero:"#A8B820",
 Roccia:"#B8A038", Spettro:"#705898", Drago:"#7038F8", Buio:"#705848",
 Acciaio:"#B8B8D0", Folletto:"#EE99AC"
 };
+
+/* resto JS invariato */
 
 function shadeColor(color, percent) {
 let R=parseInt(color.substring(1,3),16);
