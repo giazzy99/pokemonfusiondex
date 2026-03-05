@@ -257,10 +257,13 @@ body{
   transform:scale(1);
 }
 
+/* --- Blocca dimensioni immagini nella modale --- */
 .modal-img{
-  width:200px;
+  width:200px;        /* larghezza standard */
+  max-height:200px;   /* altezza massima */
   margin:10px auto;
   animation:float 3s ease-in-out infinite;
+  object-fit:contain; /* mantiene proporzioni senza deformare */
 }
 
 @keyframes float{
