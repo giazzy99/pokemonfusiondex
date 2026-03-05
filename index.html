@@ -277,7 +277,7 @@ body{
   font-size:16px;
 }
 
-/* POPUP FUSIONI SPRITES - GRIGLIA ORIZZONTALE */
+/* POPUP FUSIONI SPRITES */
 #fusionModal{
   position:fixed;
   inset:0;
@@ -298,9 +298,8 @@ body{
 }
 
 .fusion-content{
-  width:70%;         /* larghezza 70% finestra */
-  max-height:80%;    /* altezza massima 80% finestra */
-  min-height:80%;    /* altezza minima fissa così il popup è sempre grande */
+  width:70%;
+  height:80%;
   background: repeating-linear-gradient(
     to bottom,
     #0b2a4a,
@@ -317,7 +316,6 @@ body{
   justify-content:start;
   gap:15px;
 }
-}
 
 .fusion-content::-webkit-scrollbar{
   width:8px;
@@ -329,9 +327,9 @@ body{
 }
 
 .fusion-grid img{
-  object-fit: contain; /* mantiene proporzioni senza ritagli */
+  object-fit: contain;
   cursor: pointer;
-  background: none;    /* nessuno sfondo bianco */
+  background: none;
   display: block;
 }
 
@@ -426,7 +424,7 @@ body{
 <div class="modal-content" id="modalContent">
 <span class="close" onclick="forceClose()">&times;</span>
 <h2 id="modalTitle"></h2>
-<img id="modalImage" class="modal-img">
+<img id="modalImage" class="modal-img" alt="">
 <div id="modalTypes"></div>
 <p id="modalDesc"></p>
 </div>
@@ -505,16 +503,14 @@ Roccia:"#B8A038", Spettro:"#705898", Drago:"#7038F8", Buio:"#705848",
 Acciaio:"#B8B8D0", Folletto:"#EE99AC"
 };
 
+/* ================= SHADE COLOR MIGLIORATO ================= */
 function shadeColor(color,percent){
   let R=parseInt(color.substring(1,3),16);
   let G=parseInt(color.substring(3,5),16);
   let B=parseInt(color.substring(5,7),16);
-  R=parseInt(R*(100+percent)/100);
-  G=parseInt(G*(100+percent)/100);
-  B=parseInt(B*(100+percent)/100);
-  R=(R<255)?R:255;
-  G=(G<255)?G:255;
-  B=(B<255)?B:255;
+  R=Math.min(255, parseInt(R*(100+percent)/100));
+  G=Math.min(255, parseInt(G*(100+percent)/100));
+  B=Math.min(255, parseInt(B*(100+percent)/100));
   return "#" + ((R.toString(16).length==1?"0":"")+R.toString(16))+
                ((G.toString(16).length==1?"0":"")+G.toString(16))+
                ((B.toString(16).length==1?"0":"")+B.toString(16));
@@ -531,7 +527,7 @@ function createCards(data){
         let c=typeColors[t];
         card.style.background=`linear-gradient(135deg, ${c}, white)`;
         card.style.border=`4px solid ${shadeColor(c,-20)}`;
-        card.innerHTML=`<h3>${p.number}</h3><img src="${p.img}"><h2>${p.name}</h2>`;
+        card.innerHTML=`<h3>${p.number}</h3><img src="${p.img}" alt="${p.name}" loading="lazy"><h2>${p.name}</h2>`;
         card.onclick=()=>openModal(p);
         container.appendChild(card);
     });
@@ -548,6 +544,7 @@ function openModal(p){
 
     document.getElementById("modalTitle").innerText=p.number+" "+p.name;
     document.getElementById("modalImage").src=p.img;
+    document.getElementById("modalImage").alt=p.name;
     document.getElementById("modalDesc").innerText=p.desc;
 
     let typesDiv=document.getElementById("modalTypes");
@@ -575,10 +572,16 @@ function closeModal(e){
 
 function forceClose(){
     document.getElementById("pokemonModal").classList.remove("active");
+    document.getElementById("fusionModal").classList.remove("active");
     let sound=document.getElementById("openSound");
     sound.pause();
     sound.currentTime=0;
 }
+
+/* ESCAPE KEY MODAL CLOSE */
+window.addEventListener("keydown", (e)=>{
+    if(e.key==="Escape") forceClose();
+});
 
 /* ================= SEARCH & FILTER ================= */
 function updateDisplay(){
@@ -608,6 +611,7 @@ function openFusionModal(){
         let img=document.createElement("img");
         img.src=p.sprite;
         img.dataset.name=p.name;
+        img.alt=p.name;
         grid.appendChild(img);
     });
 
@@ -624,6 +628,5 @@ function closeFusionModal(e){
 createCards(pokemonData);
 
 </script>
-
 </body>
 </html>
