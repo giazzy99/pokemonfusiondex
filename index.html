@@ -328,12 +328,10 @@ body{
 }
 
 .fusion-grid img{
-  width:80px;
-  height:80px;
-  object-fit:contain;
-  cursor:pointer;
-  background:none; /* Rimuove sfondo bianco */
-  display:block;
+  object-fit: contain; /* mantiene proporzioni senza ritagli */
+  cursor: pointer;
+  background: none;    /* nessuno sfondo bianco */
+  display: block;
 }
 
 .fusion-grid img::after{
