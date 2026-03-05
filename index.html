@@ -277,19 +277,29 @@ body{
   font-size:16px;
 }
 
-/* POPUP FUSIONI SPRITES - GRIGLIA ORIZZONTALE */
+/* POPUP FUSIONI SPRITES */
 #fusionModal{
   position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding-top:30px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:70%;
+  max-height:80%;
+  min-height:80%;
+  background:#0b2a4a;
+  border:4px solid #ffffff;
+  border-radius:12px;
+  padding:20px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  display:flex;          /* cambiato da grid a flex */
+  flex-wrap: wrap;       /* permette le righe multiple */
+  align-items: flex-end; /* allinea le immagini al fondo della riga */
+  gap:15px;
   opacity:0;
   visibility:hidden;
   transition:0.3s;
-  z-index:200;
+  z-index:300;
 }
 
 #fusionModal.active{
