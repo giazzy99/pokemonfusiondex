@@ -284,8 +284,7 @@ body{
   background:rgba(0,0,0,0.6);
   display:flex;
   justify-content:center;
-  align-items:flex-start; /* inizio alto */
-  padding-top:30px;
+  align-items:flex-start; /* partenza in alto */
   opacity:0;
   visibility:hidden;
   transition:0.3s;
@@ -317,13 +316,13 @@ body{
   gap:15px;
 }
 
-/* NUOVA REGOLA: ALIGN IN BOTTOM PER GLI SPRITE */
+/* GRIGLIA SPRITE */
 .fusion-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 80px);
   justify-content: start;
   gap: 15px;
-  align-items: end; /* <- sprite allineati in basso nella cella */
+  align-items: end; /* sprite allineati in basso nella cella */
 }
 
 .fusion-content::-webkit-scrollbar{
@@ -558,73 +557,42 @@ function openModal(p){
 
     let typesDiv=document.getElementById("modalTypes");
     typesDiv.innerHTML="";
-    p.type.split("/").forEach(type=>{
+    p.type.split("/").forEach(tp=>{
         let span=document.createElement("span");
         span.className="type-badge";
-        span.style.background=typeColors[type.trim()];
-        span.innerText=type.trim();
+        span.innerText=tp.trim();
+        span.style.background=typeColors[tp.trim()]||"#000";
         typesDiv.appendChild(span);
     });
 
-    let sound=document.getElementById("openSound");
-    sound.pause();
-    sound.currentTime=0;
-    sound.playbackRate=2.0;
-    sound.play();
-
     modal.classList.add("active");
+    document.getElementById("openSound").play();
 }
 
 function closeModal(e){
-    if(e.target.id==="pokemonModal"){forceClose();}
+    if(e.target.id==="pokemonModal"){
+        document.getElementById("pokemonModal").classList.remove("active");
+    }
 }
 
 function forceClose(){
     document.getElementById("pokemonModal").classList.remove("active");
-    document.getElementById("fusionModal").classList.remove("active");
-    let sound=document.getElementById("openSound");
-    sound.pause();
-    sound.currentTime=0;
 }
 
-/* ESCAPE KEY MODAL CLOSE */
-window.addEventListener("keydown", (e)=>{
-    if(e.key==="Escape") forceClose();
-});
-
-/* ================= SEARCH & FILTER ================= */
-function updateDisplay(){
-    let input=document.getElementById("searchInput").value.toLowerCase();
-    let sort=document.getElementById("sortSelect").value;
-
-    let filtered=pokemonData.filter(p=>
-        p.name.toLowerCase().includes(input)||
-        p.number.includes(input)||
-        p.type.toLowerCase().includes(input)
-    );
-
-    if(sort==="az") filtered.sort((a,b)=>a.name.localeCompare(b.name));
-    if(sort==="type") filtered.sort((a,b)=>a.type.localeCompare(b.type));
-    if(sort==="number") filtered.sort((a,b)=>parseInt(a.number.slice(1))-parseInt(b.number.slice(1)));
-
-    createCards(filtered);
-}
-
-/* ================= FUSIONI SPRITES ================= */
+/* ================= POPUP FUSION ================= */
 function openFusionModal(){
-    const modal=document.getElementById("fusionModal");
-    const grid=document.getElementById("fusionGrid");
-    grid.innerHTML="";
-
+    const fusionModal=document.getElementById("fusionModal");
+    const fusionGrid=document.getElementById("fusionGrid");
+    fusionGrid.innerHTML="";
     pokemonData.forEach(p=>{
         let img=document.createElement("img");
         img.src=p.sprite;
-        img.dataset.name=p.name;
         img.alt=p.name;
-        grid.appendChild(img);
+        img.setAttribute("data-name",p.name);
+        fusionGrid.appendChild(img);
     });
-
-    modal.classList.add("active");
+    fusionModal.classList.add("active");
+    document.getElementById("openSound").play();
 }
 
 function closeFusionModal(e){
@@ -633,9 +601,23 @@ function closeFusionModal(e){
     }
 }
 
-/* ================= INIT ================= */
-createCards(pokemonData);
+/* ================= SEARCH & SORT ================= */
+function updateDisplay(){
+    let search=document.getElementById("searchInput").value.toLowerCase();
+    let sort=document.getElementById("sortSelect").value;
+    let filtered=pokemonData.filter(p=>p.name.toLowerCase().includes(search) || p.number.includes(search));
+    if(sort==="az"){
+        filtered.sort((a,b)=>a.name.localeCompare(b.name));
+    }else if(sort==="type"){
+        filtered.sort((a,b)=>a.type.localeCompare(b.type));
+    }else{
+        filtered.sort((a,b)=>parseInt(a.number.replace("#",""))-parseInt(b.number.replace("#","")));
+    }
+    createCards(filtered);
+}
 
+/* ================= INITIALIZE ================= */
+createCards(pokemonData);
 </script>
 
 </body>
