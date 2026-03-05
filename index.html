@@ -298,8 +298,8 @@ body{
 }
 
 .fusion-content{
-  width: 70%;
-  height: 80%; /* mantiene la dimensione rettangolare standard */
+  width:70%;
+  height:80%; /* mantiene il rettangolo standard */
   background: repeating-linear-gradient(
     to bottom,
     #0b2a4a,
@@ -309,12 +309,12 @@ body{
   border: 4px solid #ffffff;
   border-radius: 12px;
   padding: 20px;
-  overflow-y: auto; /* scrollbar verticale quando serve */
+  overflow-y: auto; /* scrollbar verticale se serve */
   overflow-x: hidden;
   display: grid;
-  grid-auto-rows: max-content; /* ogni riga si adatta all’altezza del contenuto */
+  grid-auto-rows: max-content; /* ogni riga si adatta al contenuto */
   justify-content: start;
-  gap: 10px 15px; /* verticale 10px, orizzontale 15px */
+  gap: 10px 15px; /* righe vicine e colonne distanziate */
 }
 
 .fusion-grid {
@@ -322,14 +322,15 @@ body{
   grid-template-columns: repeat(auto-fill, 80px);
   justify-content: start;
   gap: 10px 15px;
-  align-items: start; /* sprite allineati in alto nella cella */
+  align-items: start; /* righe partono dall'alto */
 }
 
-.fusion-grid img{
-  object-fit: contain;
+.fusion-grid img {
+  object-fit: contain;  /* mantiene proporzioni originali */
   cursor: pointer;
   background: none;
   display: block;
+  align-self: end;      /* base dell'immagine allineata con gli altri sprite */
 }
 
 .fusion-grid img::after{
