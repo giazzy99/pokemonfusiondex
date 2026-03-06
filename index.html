@@ -257,6 +257,7 @@ body{
   transform:scale(1);
 }
 
+/* --- Blocca dimensioni immagini nella modale --- */
 .modal-img{
   width:200px;
   max-height:200px;
@@ -279,7 +280,7 @@ body{
   font-size:16px;
 }
 
-/* POPUP FUSIONI SPRITES */
+/* POPUP FUSION SPRITES */
 #fusionModal{
   position:fixed;
   inset:0;
@@ -321,17 +322,18 @@ body{
 
 .fusion-grid{
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr); /* 10 immagini per riga */
   justify-items: center;
-  align-items: end; /* allineamento alla base */
+  align-items: end; /* tutte sulla stessa base */
   gap: 10px 15px;
 }
 
 .fusion-grid img{
-  width:auto;
-  height:80px; /* altezza uniforme */
-  object-fit:contain;
-  cursor:pointer;
+  width: auto;
+  max-width: 70px;
+  max-height: 70px;
+  object-fit: contain;
+  cursor: pointer;
 }
 
 /* MOBILE */
