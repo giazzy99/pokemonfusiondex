@@ -320,26 +320,48 @@ body{
   gap: 10px 15px;
 }
 
-/* GRIGLIA FUSION SPRITES CON CELLE */
 .fusion-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* 10 immagini per riga */
+  justify-items: center;
   gap: 10px 15px;
 }
 
 .fusion-item {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end; /* tutte le immagini appoggiate sullo stesso piano */
-  height: 120px; /* altezza uniforme per ogni cella */
+  display:flex;
+  justify-content:center;
+  align-items:flex-end; /* immagini sullo stesso piano */
+  height:120px; /* altezza della cella */
+  position:relative; /* per tooltip */
 }
 
 .fusion-item img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  cursor: pointer;
-  display: block;
+  max-height:100%;
+  object-fit:contain;
+  cursor:pointer;
+}
+
+/* TOOLTIP */
+.fusion-item::after {
+  content: attr(data-name);
+  position:absolute;
+  bottom:100%; 
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  color:black;
+  font-family:'Press Start 2P';
+  font-size:8px;
+  padding:3px 5px;
+  border-radius:4px;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 0.2s;
+}
+
+.fusion-item:hover::after {
+  opacity:1;
 }
 
 /* MOBILE */
@@ -605,13 +627,14 @@ function openFusionModal(){
     grid.innerHTML="";
 
     pokemonData.forEach(p=>{
-        let cell=document.createElement("div");
-        cell.className="fusion-item";
+        let div=document.createElement("div");
+        div.className="fusion-item";
         let img=document.createElement("img");
         img.src=p.sprite;
         img.alt=p.name;
-        cell.appendChild(img);
-        grid.appendChild(cell);
+        img.dataset.name=p.name;
+        div.appendChild(img);
+        grid.appendChild(div);
     });
 
     modal.classList.add("active");
@@ -625,7 +648,6 @@ function closeFusionModal(e){
 
 /* ================= INIT ================= */
 createCards(pokemonData);
-
 </script>
 
 </body>
