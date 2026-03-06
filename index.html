@@ -10,381 +10,360 @@
 
 <style>
 body{
-  margin:0;
-  background: repeating-linear-gradient(
-    to bottom,
-    #0b2a4a,
-    #0b2a4a 10px,
-    #111f3a 11px
-  );
-  font-family:'Press Start 2P',cursive;
-  overflow-x:hidden;
+margin:0;
+background: repeating-linear-gradient(
+to bottom,
+#0b2a4a,
+#0b2a4a 10px,
+#111f3a 11px
+);
+font-family:'Press Start 2P',cursive;
+overflow-x:hidden;
 }
 
-/* HEADER ROSSO */
+/* HEADER */
 .pokedex-header{
-  background:linear-gradient(135deg,#aa0000,#ff0000);
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-bottom:4px solid #660000;
-  position:relative;
+background:linear-gradient(135deg,#aa0000,#ff0000);
+height:90px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-bottom:4px solid #660000;
+position:relative;
 }
 
 .pokedex-header h1{
-  color:white;
-  font-size:18px;
-  text-shadow:3px 3px 0 #660000;
+color:white;
+font-size:18px;
+text-shadow:3px 3px 0 #660000;
 }
 
 /* PIKA AREA */
 .pika-area{
-  position:absolute;
-  right:15px;
-  top:50%;
-  transform:translateY(-50%);
-  display:flex;
-  align-items:center;
-  gap:10px;
+position:absolute;
+right:15px;
+top:50%;
+transform:translateY(-50%);
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 .pika-text,
 .pika-arrow-text{
-  color:#FFD700;
-  font-size:10px;
-  font-weight:bold;
-  text-shadow:
-    -2px -2px 0 #003A70,
-    2px -2px 0 #003A70,
-    -2px 2px 0 #003A70,
-    2px 2px 0 #003A70;
+color:#FFD700;
+font-size:10px;
+font-weight:bold;
+text-shadow:
+-2px -2px 0 #003A70,
+2px -2px 0 #003A70,
+-2px 2px 0 #003A70,
+2px 2px 0 #003A70;
 }
 
-/* PIKACHU BUTTON */
 .pika-button{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:white;
-  border:5px solid #FFD700;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:0.3s;
-  padding:0;
+width:70px;
+height:70px;
+border-radius:50%;
+background:white;
+border:5px solid #FFD700;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.3s;
+padding:0;
 }
 
 .pika-button:hover{
-  transform:scale(1.05);
+transform:scale(1.05);
 }
 
 .pika-button img{
-  width:50px;
-  height:auto;
-  display:block;
+width:50px;
 }
 
 /* MENU */
 .pika-menu{
-  position:absolute;
-  top:85px;
-  right:0;
-  background:white;
-  border:3px solid #cc0000;
-  border-radius:8px;
-  display:none;
-  flex-direction:column;
-  min-width:190px;
-  z-index:200;
-  overflow:hidden;
+position:absolute;
+top:85px;
+right:0;
+background:white;
+border:3px solid #cc0000;
+border-radius:8px;
+display:none;
+flex-direction:column;
+min-width:190px;
+z-index:200;
+overflow:hidden;
 }
 
 .pika-menu button{
-  padding:12px;
-  border:none;
-  background:white;
-  cursor:pointer;
-  font-family:'Press Start 2P';
-  font-size:10px;
-  white-space:nowrap;
-  text-align:center;
-}
-
-.pika-menu button:first-child{
-  border-bottom:2px solid black;
+padding:12px;
+border:none;
+background:white;
+cursor:pointer;
+font-family:'Press Start 2P';
+font-size:10px;
 }
 
 .pika-menu button:hover{
-  background:#f0f0f0;
+background:#f0f0f0;
 }
 
-/* BANNER ERBA */
+/* CONTROLS */
 .controls-wrapper{
-  background-image:url("Erba.png");
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  height:90px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+background-image:url("Erba.png");
+background-size:cover;
+background-position:center;
+height:90px;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 .controls{
-  display:flex;
-  gap:15px;
+display:flex;
+gap:15px;
 }
 
 .controls input,
 .controls select{
-  padding:10px;
-  font-family:'Press Start 2P';
-  font-size:10px;
-  border:3px solid #cc0000;
-  background:white;
+padding:10px;
+font-family:'Press Start 2P';
+font-size:10px;
+border:3px solid #cc0000;
+background:white;
 }
 
 /* CARDS */
 .card-container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px;
-  padding:40px;
-  justify-items:center;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+padding:40px;
+justify-items:center;
 }
 
 .card{
-  border-radius:12px;
-  width:220px;
-  min-height:330px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:space-between;
-  padding:15px 10px;
-  position:relative;
-  cursor:pointer;
-  overflow:hidden;
-  transition:0.3s;
-  color:black;
+border-radius:12px;
+width:220px;
+min-height:330px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:space-between;
+padding:15px 10px;
+position:relative;
+cursor:pointer;
+overflow:hidden;
+transition:0.3s;
+color:black;
 }
 
 .card:hover{
-  transform:scale(1.05);
+transform:scale(1.05);
 }
 
 .card::before{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:linear-gradient(to bottom,
-    rgba(204,0,0,0.4) 50%,
-    rgba(255,255,255,0.4) 50%);
-  border:4px solid rgba(0,0,0,0.4);
-  z-index:0;
+content:"";
+position:absolute;
+width:180px;
+height:180px;
+border-radius:50%;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:linear-gradient(to bottom,
+rgba(204,0,0,0.4) 50%,
+rgba(255,255,255,0.4) 50%);
+border:4px solid rgba(0,0,0,0.4);
+z-index:0;
 }
 
 .card img{
-  width:180px;
-  max-height:170px;
-  object-fit:contain;
-  position:relative;
-  z-index:1;
+width:180px;
+max-height:170px;
+object-fit:contain;
+position:relative;
+z-index:1;
 }
 
 .card h3,
 .card h2{
-  position:relative;
-  z-index:1;
-  margin:6px 0;
-  text-align:center;
-  font-size:11px;
+position:relative;
+z-index:1;
+font-size:11px;
+text-align:center;
 }
 
 /* TYPE BADGE */
 .type-badge{
-  padding:4px 8px;
-  border-radius:6px;
-  font-size:9px;
-  color:white;
-  display:inline-block;
-  margin:2px;
+padding:4px 8px;
+border-radius:6px;
+font-size:9px;
+color:white;
+display:inline-block;
+margin:2px;
 }
 
-/* MODAL POKEMON */
+/* MODAL */
 .modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(5px);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  opacity:0;
-  visibility:hidden;
-  transition:0.3s;
-  z-index:100;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(5px);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+visibility:hidden;
+transition:0.3s;
+z-index:100;
 }
 
 .modal.active{
-  opacity:1;
-  visibility:visible;
+opacity:1;
+visibility:visible;
 }
 
 .modal-content{
-  width:380px;
-  height:420px;
-  padding:20px;
-  border-radius:18px;
-  text-align:center;
-  transform:scale(0.8);
-  transition:0.3s;
-  color:black;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  position:relative;
+width:380px;
+height:420px;
+padding:20px;
+border-radius:18px;
+text-align:center;
+transform:scale(0.8);
+transition:0.3s;
+color:black;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+position:relative;
 }
 
 .modal.active .modal-content{
-  transform:scale(1);
+transform:scale(1);
 }
 
-/* --- Blocca dimensioni immagini nella modale --- */
+/* POKEBALL ANIMATION */
+
+.pokeball{
+width:80px;
+margin:0 auto;
+display:none;
+animation:pokeballOpen 0.6s ease forwards;
+}
+
+@keyframes pokeballOpen{
+
+0%{
+transform:scale(0.5) rotate(0deg);
+opacity:1;
+}
+
+50%{
+transform:scale(1.2) rotate(180deg);
+}
+
+100%{
+transform:scale(0);
+opacity:0;
+}
+
+}
+
+/* POKEMON IMAGE */
+
 .modal-img{
-  width:200px;        /* larghezza standard */
-  max-height:200px;   /* altezza massima */
-  margin:10px auto;
-  animation:float 3s ease-in-out infinite;
-  object-fit:contain; /* mantiene proporzioni senza deformare */
+width:200px;
+max-height:200px;
+margin:10px auto;
+animation:float 3s ease-in-out infinite;
+object-fit:contain;
 }
 
 @keyframes float{
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-  100%{transform:translateY(0);}
+0%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0);}
 }
 
 .close{
-  position:absolute;
-  right:15px;
-  top:10px;
-  cursor:pointer;
-  font-size:16px;
+position:absolute;
+right:15px;
+top:10px;
+cursor:pointer;
+font-size:16px;
 }
 
-/* POPUP FUSIONI SPRITES */
+/* FUSION GRID */
+
 #fusionModal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  display:flex;
-  justify-content:center;
-  align-items:flex-start; /* popup parte dall'alto */
-  padding-top:30px;
-  opacity:0;
-  visibility:hidden;
-  transition:0.3s;
-  z-index:200;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+display:flex;
+justify-content:center;
+align-items:flex-start;
+padding-top:30px;
+opacity:0;
+visibility:hidden;
+transition:0.3s;
+z-index:200;
 }
 
 #fusionModal.active{
-  opacity:1;
-  visibility:visible;
+opacity:1;
+visibility:visible;
 }
 
 .fusion-content{
-  width:70%;
-  height:80%; /* mantiene il rettangolo standard */
-  background: repeating-linear-gradient(
-    to bottom,
-    #0b2a4a,
-    #0b2a4a 10px,
-    #111f3a 11px
-  );
-  border: 4px solid #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  overflow-y: auto; /* scrollbar verticale se serve */
-  overflow-x: hidden;
-  display: grid;
-  grid-auto-rows: max-content; /* ogni riga si adatta al contenuto */
-  justify-content: start;
-  gap: 10px 15px; /* righe vicine e colonne distanziate */
+width:70%;
+height:80%;
+background: repeating-linear-gradient(
+to bottom,
+#0b2a4a,
+#0b2a4a 10px,
+#111f3a 11px
+);
+border:4px solid #fff;
+border-radius:12px;
+padding:20px;
+overflow-y:auto;
+display:grid;
+grid-template-columns:repeat(auto-fill,80px);
+gap:20px;
 }
 
-.fusion-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 80px);
-  justify-content: start;
-  gap: 10px 15px;
-  align-items: start; /* righe partono dall'alto */
+.fusion-item{
+position:relative;
+text-align:center;
 }
 
-.fusion-grid img {
-  object-fit: contain;  /* mantiene proporzioni originali */
-  cursor: pointer;
-  background: none;
-  display: block;
-  align-self: end;      /* base dell'immagine allineata con gli altri sprite */
+.fusion-item img{
+width:80px;
+cursor:pointer;
 }
 
-.fusion-grid img::after{
-  content: attr(data-name);
-  position:absolute;
-  bottom:100%;
-  left:50%;
-  transform:translateX(-50%);
-  background:white;
-  color:black;
-  padding:4px 6px;
-  font-family:'Press Start 2P';
-  font-size:8px;
-  border-radius:4px;
-  white-space:nowrap;
-  opacity:0;
-  pointer-events:none;
-  transition:0.2s;
+.tooltip{
+position:absolute;
+bottom:90%;
+left:50%;
+transform:translateX(-50%);
+background:white;
+color:black;
+padding:4px 6px;
+font-size:8px;
+border-radius:4px;
+opacity:0;
+pointer-events:none;
+transition:0.2s;
+white-space:nowrap;
 }
 
-.fusion-grid img:hover::after{
-  opacity:1;
-}
-
-/* MOBILE */
-@media screen and (max-width: 500px){
-  .pika-text,
-  .pika-arrow-text{
-    display:none;
-  }
-  .card-container{
-    gap:15px;
-    padding:20px;
-  }
-  .card{
-    width:90%;
-  }
-  .modal-content{
-    width:90%;
-    height:auto;
-    max-height:90vh;
-    overflow-y:auto;
-  }
-  .controls{
-    flex-direction:column;
-    align-items:center;
-  }
-  .controls input,
-  .controls select{
-    width:100%;
-  }
+.fusion-item:hover .tooltip{
+opacity:1;
 }
 </style>
 </head>
@@ -395,23 +374,26 @@ body{
 <h1>FusionDex 3.8</h1>
 
 <div class="pika-area">
+
 <span class="pika-text">Pika Me!</span>
 <span class="pika-arrow-text">---></span>
 
 <button class="pika-button" onclick="togglePikaMenu()">
-<img src="Pikas.png" alt="Pikachu">
+<img src="Pikas.png">
 </button>
 
 <div class="pika-menu" id="pikaMenu">
 <button onclick="playPikachuSound()">Pika Pika!</button>
 <button onclick="openFusionModal()">Fusion Sprites</button>
 </div>
+
 </div>
 </header>
 
 <div class="controls-wrapper">
 <div class="controls">
 <input type="text" id="searchInput" placeholder="CERCA..." onkeyup="updateDisplay()">
+
 <select id="sortSelect" onchange="updateDisplay()">
 <option value="number">Per numero</option>
 <option value="az">Alfabetico A-Z</option>
@@ -422,217 +404,238 @@ body{
 
 <div class="card-container" id="cardContainer"></div>
 
-<!-- MODAL POKEMON -->
+<!-- MODAL -->
+
 <div id="pokemonModal" class="modal" onclick="closeModal(event)">
+
 <div class="modal-content" id="modalContent">
+
 <span class="close" onclick="forceClose()">&times;</span>
+
 <h2 id="modalTitle"></h2>
-<img id="modalImage" class="modal-img" alt="">
+
+<img id="pokeballAnim" src="pokeball.png" class="pokeball">
+
+<img id="modalImage" class="modal-img">
+
 <div id="modalTypes"></div>
+
 <p id="modalDesc"></p>
+
 </div>
 </div>
 
-<!-- POPUP FUSIONI SPRITES -->
+<!-- FUSION MODAL -->
+
 <div id="fusionModal" onclick="closeFusionModal(event)">
-<div class="fusion-content fusion-grid" id="fusionGrid"></div>
+<div class="fusion-content" id="fusionGrid"></div>
 </div>
 
 <audio id="openSound" src="Ball.mp3"></audio>
 <audio id="pikachuSound" src="Verso.mp3"></audio>
 
 <script>
-/* ================= PIKACHU MENU AUDIO ================= */
-function stopPikachuSound(){
-    let s=document.getElementById("pikachuSound");
-    s.pause();
-    s.currentTime=0;
-}
 
-function togglePikaMenu(){
-    let menu=document.getElementById("pikaMenu");
-    if(menu.style.display==="flex"){
-        menu.style.display="none";
-        stopPikachuSound();
-    }else{
-        menu.style.display="flex";
-        menu.style.flexDirection="column";
-    }
-}
+/* DATA */
 
-function playPikachuSound(){
-    let s=document.getElementById("pikachuSound");
-    s.pause();
-    s.currentTime=0;
-    s.play();
-}
-
-window.addEventListener("click",function(e){
-    if(!e.target.closest(".pika-area")){
-        document.getElementById("pikaMenu").style.display="none";
-        stopPikachuSound();
-    }
-});
-
-/* ================= POKEMON DATA ================= */
 const pokemonData=[
-  {number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",sprite:"Alakazario Sprite.png",desc:"..."},
-  {number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",sprite:"Chapras Sprite.png",desc:"..."},
-  {number:"#003",name:"Dorygon Z",type:"Psico / Ghiaccio",img:"Dorygon Z.png",sprite:"Dorygon Z Sprite.png",desc:"..."},
-  {number:"#004",name:"Megarig",type:"Erba",img:"Megarig.png",sprite:"Megarig Sprite.png",desc:"..."},
-  {number:"#005",name:"Troparia",type:"Erba / Roccia",img:"Troparia.png",sprite:"Troparia Sprite.png",desc:"..."},
-  {number:"#006",name:"Girandoom",type:"Elettro",img:"Girandoom.png",sprite:"Girandoom Sprite.png",desc:"..."},
-  {number:"#007",name:"Glizor",type:"Volante / Veleno",img:"Glizor.png",sprite:"Glizor Sprite.png",desc:"..."},
-  {number:"#008",name:"Lightyena",type:"Buio",img:"Lightyena.png",sprite:"Lightyena Sprite.png",desc:"..."},
-  {number:"#009",name:"Sharkord",type:"Acqua / Buio",img:"Sharkord.png",sprite:"Sharkord Sprite.png",desc:"..."},
-  {number:"#010",name:"Magma",type:"Fuoco",img:"Magma.png",sprite:"Magma Sprite.png",desc:"..."},
-  {number:"#011",name:"Arbas",type:"Veleno",img:"Arbas.png",sprite:"Arbas Sprite.png",desc:"..."},
-  {number:"#012",name:"Tyrosion",type:"Drago / Fuoco",img:"Tyrosion.png",sprite:"Tyrosion Sprite.png",desc:"..."},
-  {number:"#013",name:"Shedos",type:"Coleottero / Elettro",img:"Shedos.png",sprite:"Shedos Sprite.png",desc:"..."},
-  {number:"#014",name:"Mandoum",type:"Elettro",img:"Mandoum.png",sprite:"Mandoum Sprite.png",desc:"..."},
-  {number:"#015",name:"Gigadong",type:"Psico / Acciaio",img:"Gigadong.png",sprite:"Gigadong Sprite.png",desc:"..."},
-  {number:"#016",name:"Herazorn",type:"Coleottero / Roccia",img:"Herazorn.png",sprite:"Herazorn Sprite.png",desc:"..."},
-  {number:"#017",name:"Dodactyl",type:"Normale",img:"Dodactyl.png",sprite:"Dodactyl Sprite.png",desc:"..."},
-  {number:"#018",name:"Gabitzel",type:"Acqua",img:"Gabitzel.png",sprite:"Gabitzel Sprite.png",desc:"..."},
-  {number:"#019",name:"Sabler",type:"Ghiaccio / Volante",img:"Sabler.png",sprite:"Sabler Sprite.png",desc:"..."},
-  {number:"#020",name:"Pibat",type:"Elettro / Folletto",img:"Pibat.png",sprite:"Pibat Sprite.png",desc:"..."},
-  {number:"#021", name:"Blazray", type:"Buio / Elettro", img:"Blazray.png", sprite:"Blazray Sprite.png", desc:"..."},
-  {number:"#022", name:"Vespoom", type:"Coleottero", img:"Vespoom.png", sprite:"Vespoom Sprite.png", desc:"..."},
-  {number:"#023", name:"Darkvoir", type:"Spettro", img:"Darkvoir.png", sprite:"Darkvoir Sprite.png", desc:"..."},
-  {number:"#024", name:"Gardelle", type:"Psico", img:"Gardelle.png", sprite:"Gardelle Sprite.png", desc:"..."},
-  {number:"#025", name:"Volter", type:"Spettro / Normale", img:"Volter.png", sprite:"Volter Sprite.png", desc:"..."}
+
+{number:"#001",name:"Alakazario",type:"Buio / Lotta",img:"Alakazario.png",sprite:"Alakazario Sprite.png",desc:"..."},
+
+{number:"#002",name:"Chapras",type:"Fuoco / Drago",img:"Chapras.png",sprite:"Chapras Sprite.png",desc:"..."},
+
+{number:"#003",name:"Dorygon Z",type:"Psico / Ghiaccio",img:"Dorygon Z.png",sprite:"Dorygon Z Sprite.png",desc:"..."}
+
 ];
 
+/* TYPE COLORS */
+
 const typeColors={
-Normale:"#A8A878", Fuoco:"#F08030", Acqua:"#6890F0", Erba:"#78C850",
-Elettro:"#F8D030", Ghiaccio:"#98D8D8", Lotta:"#C03028", Veleno:"#A040A0",
-Terra:"#E0C068", Volante:"#A890F0", Psico:"#F85888", Coleottero:"#A8B820",
-Roccia:"#B8A038", Spettro:"#705898", Drago:"#7038F8", Buio:"#705848",
-Acciaio:"#B8B8D0", Folletto:"#EE99AC"
+Normale:"#A8A878",
+Fuoco:"#F08030",
+Acqua:"#6890F0",
+Erba:"#78C850",
+Elettro:"#F8D030",
+Ghiaccio:"#98D8D8",
+Lotta:"#C03028",
+Veleno:"#A040A0",
+Volante:"#A890F0",
+Psico:"#F85888",
+Coleottero:"#A8B820",
+Roccia:"#B8A038",
+Spettro:"#705898",
+Drago:"#7038F8",
+Buio:"#705848",
+Acciaio:"#B8B8D0",
+Folletto:"#EE99AC"
 };
 
-/* ================= SHADE COLOR ================= */
-function shadeColor(color,percent){
-  let R=parseInt(color.substring(1,3),16);
-  let G=parseInt(color.substring(3,5),16);
-  let B=parseInt(color.substring(5,7),16);
-  R=Math.min(255, parseInt(R*(100+percent)/100));
-  G=Math.min(255, parseInt(G*(100+percent)/100));
-  B=Math.min(255, parseInt(B*(100+percent)/100));
-  return "#" + ((R.toString(16).length==1?"0":"")+R.toString(16))+
-               ((G.toString(16).length==1?"0":"")+G.toString(16))+
-               ((B.toString(16).length==1?"0":"")+B.toString(16));
-}
+/* CREATE CARDS */
 
-/* ================= CREATE CARDS ================= */
 function createCards(data){
-    const container=document.getElementById("cardContainer");
-    container.innerHTML="";
-    data.forEach(p=>{
-        let card=document.createElement("div");
-        card.className="card";
-        let t=p.type.split("/")[0].trim();
-        let c=typeColors[t];
-        card.style.background=`linear-gradient(135deg, ${c}, white)`;
-        card.style.border=`4px solid ${shadeColor(c,-20)}`;
-        card.innerHTML=`<h3>${p.number}</h3><img src="${p.img}" alt="${p.name}" loading="lazy"><h2>${p.name}</h2>`;
-        card.onclick=()=>openModal(p);
-        container.appendChild(card);
-    });
+
+const container=document.getElementById("cardContainer");
+
+container.innerHTML="";
+
+data.forEach(p=>{
+
+let card=document.createElement("div");
+
+card.className="card";
+
+let t=p.type.split("/")[0].trim();
+
+let c=typeColors[t];
+
+card.style.background=`linear-gradient(135deg,${c},white)`;
+
+card.innerHTML=`
+<h3>${p.number}</h3>
+<img src="${p.img}">
+<h2>${p.name}</h2>
+`;
+
+card.onclick=()=>openModal(p);
+
+container.appendChild(card);
+
+});
+
 }
 
-/* ================= MODAL POKEMON ================= */
+/* OPEN MODAL */
+
 function openModal(p){
-    const modal=document.getElementById("pokemonModal");
-    const content=document.getElementById("modalContent");
-    let t=p.type.split("/")[0].trim();
-    let c=typeColors[t];
-    content.style.background=`linear-gradient(135deg, ${c}, white)`;
-    content.style.border=`4px solid ${shadeColor(c,-20)}`;
 
-    document.getElementById("modalTitle").innerText=p.number+" "+p.name;
-    document.getElementById("modalImage").src=p.img;
-    document.getElementById("modalImage").alt=p.name;
-    document.getElementById("modalDesc").innerText=p.desc;
+const modal=document.getElementById("pokemonModal");
 
-    let typesDiv=document.getElementById("modalTypes");
-    typesDiv.innerHTML="";
-    p.type.split("/").forEach(type=>{
-        let span=document.createElement("span");
-        span.className="type-badge";
-        span.style.background=typeColors[type.trim()];
-        span.innerText=type.trim();
-        typesDiv.appendChild(span);
-    });
+const pokeImg=document.getElementById("modalImage");
 
-    let sound=document.getElementById("openSound");
-    sound.pause();
-    sound.currentTime=0;
-    sound.playbackRate=2.0;
-    sound.play();
+const ball=document.getElementById("pokeballAnim");
 
-    modal.classList.add("active");
+document.getElementById("modalTitle").innerText=p.number+" "+p.name;
+
+document.getElementById("modalDesc").innerText=p.desc;
+
+let typesDiv=document.getElementById("modalTypes");
+
+typesDiv.innerHTML="";
+
+p.type.split("/").forEach(type=>{
+
+let span=document.createElement("span");
+
+span.className="type-badge";
+
+span.style.background=typeColors[type.trim()];
+
+span.innerText=type.trim();
+
+typesDiv.appendChild(span);
+
+});
+
+pokeImg.style.opacity=0;
+
+ball.style.display="block";
+
+setTimeout(()=>{
+
+pokeImg.src=p.img;
+
+pokeImg.style.opacity=1;
+
+ball.style.display="none";
+
+},500);
+
+modal.classList.add("active");
+
 }
+
+/* CLOSE MODAL */
 
 function closeModal(e){
-    if(e.target.id==="pokemonModal"){forceClose();}
+
+if(e.target.id==="pokemonModal") forceClose();
+
 }
 
 function forceClose(){
-    document.getElementById("pokemonModal").classList.remove("active");
-    document.getElementById("fusionModal").classList.remove("active");
-    let sound=document.getElementById("openSound");
-    sound.pause();
-    sound.currentTime=0;
+
+document.getElementById("pokemonModal").classList.remove("active");
+
 }
 
-/* ESCAPE KEY MODAL CLOSE */
-window.addEventListener("keydown", (e)=>{
-    if(e.key==="Escape") forceClose();
+/* FUSION GRID */
+
+function openFusionModal(){
+
+const grid=document.getElementById("fusionGrid");
+
+grid.innerHTML="";
+
+pokemonData.forEach(p=>{
+
+let item=document.createElement("div");
+
+item.className="fusion-item";
+
+let img=document.createElement("img");
+
+img.src=p.sprite;
+
+let tooltip=document.createElement("div");
+
+tooltip.className="tooltip";
+
+tooltip.innerText=p.name;
+
+item.appendChild(img);
+
+item.appendChild(tooltip);
+
+grid.appendChild(item);
+
 });
 
-/* ================= SEARCH & FILTER ================= */
-function updateDisplay(){
-    let input=document.getElementById("searchInput").value.toLowerCase();
-    let sort=document.getElementById("sortSelect").value;
+document.getElementById("fusionModal").classList.add("active");
 
-    let filtered=pokemonData.filter(p=>
-        p.name.toLowerCase().includes(input)||
-        p.number.includes(input)||
-        p.type.toLowerCase().includes(input)
-    );
-
-    if(sort==="az") filtered.sort((a,b)=>a.name.localeCompare(b.name));
-    if(sort==="type") filtered.sort((a,b)=>a.type.localeCompare(b.type));
-    if(sort==="number") filtered.sort((a,b)=>parseInt(a.number.slice(1))-parseInt(b.number.slice(1)));
-
-    createCards(filtered);
-}
-
-/* ================= FUSIONI SPRITES ================= */
-function openFusionModal(){
-    const modal=document.getElementById("fusionModal");
-    const grid=document.getElementById("fusionGrid");
-    grid.innerHTML="";
-
-    pokemonData.forEach(p=>{
-        let img=document.createElement("img");
-        img.src=p.sprite;
-        img.dataset.name=p.name;
-        img.alt=p.name;
-        grid.appendChild(img);
-    });
-
-    modal.classList.add("active");
 }
 
 function closeFusionModal(e){
-    if(e.target.id==="fusionModal"){
-        document.getElementById("fusionModal").classList.remove("active");
-    }
+
+if(e.target.id==="fusionModal"){
+
+document.getElementById("fusionModal").classList.remove("active");
+
 }
 
-/* ================= INIT ================= */
+}
+
+/* SEARCH */
+
+function updateDisplay(){
+
+let input=document.getElementById("searchInput").value.toLowerCase();
+
+let filtered=pokemonData.filter(p=>
+
+p.name.toLowerCase().includes(input) ||
+
+p.number.includes(input) ||
+
+p.type.toLowerCase().includes(input)
+
+);
+
+createCards(filtered);
+
+}
+
+/* INIT */
+
 createCards(pokemonData);
 
 </script>
