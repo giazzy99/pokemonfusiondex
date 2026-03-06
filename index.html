@@ -328,34 +328,37 @@ body{
   align-items: start; /* righe partono dall'alto */
 }
 
+/* === NUOVA SEZIONE TOOLTIP NOME SUGLI SPRITE === */
 .fusion-grid img {
-  object-fit: contain;  /* mantiene proporzioni originali */
+  object-fit: contain;
   cursor: pointer;
   background: none;
   display: block;
-  align-self: end;      /* base dell'immagine allineata con gli altri sprite */
+  align-self: end;
+  position: relative; /* necessario per ::after */
 }
 
 .fusion-grid img::after{
   content: attr(data-name);
-  position:absolute;
-  bottom:100%;
-  left:50%;
-  transform:translateX(-50%);
-  background:white;
-  color:black;
-  padding:4px 6px;
-  font-family:'Press Start 2P';
-  font-size:8px;
-  border-radius:4px;
-  white-space:nowrap;
-  opacity:0;
-  pointer-events:none;
-  transition:0.2s;
+  position: absolute;
+  bottom: 100%; /* sopra lo sprite */
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+  background: white;
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 7px; /* piccolo banner */
+  padding: 2px 4px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+  z-index: 10;
 }
 
 .fusion-grid img:hover::after{
-  opacity:1;
+  opacity: 1;
 }
 
 /* MOBILE */
@@ -623,7 +626,7 @@ function openFusionModal(){
     pokemonData.forEach(p=>{
         let img=document.createElement("img");
         img.src=p.sprite;
-        img.dataset.name=p.name;
+        img.dataset.name=p.name; // tooltip ora funziona
         img.alt=p.name;
         grid.appendChild(img);
     });
